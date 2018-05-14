@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import { loadPageFromHeaderLink } from './reducers.js';
 
-
-const store = createStore(loadPageFromHeaderLink);
+const store = createStore(loadPageFromHeaderLink, applyMiddleware(logger));
 
 ReactDOM.render(<Provider store = {store}>
 				  <App />
