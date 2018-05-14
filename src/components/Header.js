@@ -11,13 +11,13 @@ const Header = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            {isCurrentPageActive("Product", props.page)}
+            {isCurrentPageActive("Product", props.page, props.click)}
           </li>
           <li className="nav-item">
-            {isCurrentPageActive("About", props.page)}
+            {isCurrentPageActive("About", props.page, props.click)}
           </li>
           <li className="nav-item">
-            {isCurrentPageActive("Contact", props.page)}
+            {isCurrentPageActive("Contact", props.page, props.click)}
           </li>
         </ul>
       </div>
@@ -25,11 +25,11 @@ const Header = (props) => {
   );
 }
 
-function isCurrentPageActive(linkText, propsPageValue) {
+function isCurrentPageActive(linkText, propsPageValue, clickFunction) {
   if (linkText === propsPageValue) {
-    return <a className="nav-link active" href="#">{linkText}</a>;
+    return <button className="nav-link active" value={linkText} onClick={clickFunction}>{linkText}</button>;
   }
-  return <a className="nav-link" href="#">{linkText}</a>;
+  return <button className="nav-link" value={linkText} onClick={clickFunction}>{linkText}</button>;
 }
 
 export default Header;
