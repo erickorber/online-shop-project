@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">Shop Logo Image</a>
@@ -10,19 +10,26 @@ const Header = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Products <span className="sr-only">(current)</span></a>
+          <li className="nav-item">
+            {isCurrentPageActive("Product", props.page)}
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">About</a>
+            {isCurrentPageActive("About", props.page)}
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Contact</a>
+            {isCurrentPageActive("Contact", props.page)}
           </li>
         </ul>
       </div>
     </nav>
   );
+}
+
+function isCurrentPageActive(linkText, propsPageValue) {
+  if (linkText === propsPageValue) {
+    return <a className="nav-link active" href="#">{linkText}</a>;
+  }
+  return <a className="nav-link" href="#">{linkText}</a>;
 }
 
 export default Header;
