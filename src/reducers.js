@@ -1,7 +1,7 @@
 import { LOAD_HEADER_LINK } from './constants.js';
 
 const initialState = {
-	pageValue: 'Product'
+	pageValue: 'Products'
 }
 
 export const loadPageFromHeaderLink = (state = initialState, action = {}) => {
