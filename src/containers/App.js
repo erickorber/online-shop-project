@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './App.css';
 import Header from '../components/Header.js';
 
 import { setPageToLoadFromHeaderLink } from '../actions.js';
