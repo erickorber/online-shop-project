@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from '../logo.svg';
 import './App.css';
 import Header from '../components/Header.js';
 
 import { setPageToLoadFromHeaderLink } from '../actions.js';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		pageValue: state.pageValue
 	}
@@ -19,10 +18,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class App extends Component {
-
-  constructor() {
-  	super();
-  }
 
   render() {
 
