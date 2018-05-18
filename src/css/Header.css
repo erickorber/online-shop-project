@@ -1,8 +1,3 @@
-@font-face {
-    font-family: karmaMedium;
-    src: url(../fonts/karma-medium.ttf);
-}
-
 button, button:focus {
 	border: none;
 	outline: none;
@@ -10,6 +5,15 @@ button, button:focus {
 	margin: 7px;
 	font-family: karmaMedium;
 	font-size: 18px;
+}
+
+.navbar {
+	border-bottom: 1px solid #dee2e6;
+}
+
+@font-face {
+    font-family: karmaMedium;
+    src: url(../fonts/karma-medium.ttf);
 }
 
 .navbar-brand {
