@@ -11,15 +11,6 @@ button, button:focus {
 	border-bottom: 1px solid #dee2e6;
 }
 
-.navbar-toggler:focus {
-	font-size: 1.25rem;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.navbar-toggler:active {
-	background-color: #1e1e1e17;
-}
-
 @font-face {
     font-family: karmaMedium;
     src: url(../fonts/karma-medium.ttf);
@@ -28,6 +19,15 @@ button, button:focus {
 .navbar-brand {
 	background-image: url("../images/logo.png");
 	background-size: contain;
+}
+
+.navbar-toggler:focus {
+	font-size: 1.25rem;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler:active {
+	background-color: #1e1e1e17;
 }
 
 @media only screen and (max-width: 991.98px) {
