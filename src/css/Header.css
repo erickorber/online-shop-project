@@ -1,0 +1,25 @@
+button, button:focus {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	margin: 7px;
+}
+
+.navbar-brand {
+	background-image: url("../images/logo.png");
+	background-size: contain;
+}
+
+@media only screen and (max-width: 991.98px) {
+	.navbar-brand {
+		height: 70px;
+		width: 70px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.navbar-brand {
+		height: 90px;
+		width: 90px;
+	}
+}
