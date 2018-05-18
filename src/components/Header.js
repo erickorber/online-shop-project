@@ -30,9 +30,9 @@ const Header = (props) => {
 
 function isCurrentPageActive(linkText, propsPageValue, clickFunction) {
   if (linkText === propsPageValue) {
-    return <button className="nav-link active" value={linkText} onClick={clickFunction}>{linkText}</button>;
+    return <button className="nav-link active mx-auto" value={linkText} onClick={clickFunction}>{linkText}</button>;
   }
-  return <button className="nav-link" value={linkText} onClick={clickFunction}>{linkText}</button>;
+  return <button className="nav-link mx-auto" value={linkText} onClick={clickFunction}>{linkText}</button>;
 }
 
 export default Header;
