@@ -4,7 +4,7 @@ const initialState = {
 	pageValue: 'Products'
 }
 
-export const loadPageFromHeaderLink = (state = initialState, action = {}) => {
+export const navigationReducer = (state = initialState, action = {}) => {
 	switch(action.type) {
 		case LOAD_HEADER_LINK:
 			return Object.assign({}, state, {pageValue: action.payload});
