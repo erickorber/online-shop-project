@@ -1,4 +1,4 @@
-import { LOAD_HEADER_LINK, LOAD_PRODUCT_PAGE } from './constants.js';
+import { LOAD_PAGE, LOAD_PRODUCT } from './constants.js';
 
 const initialState = {
 	pageValue: 'Products',
@@ -7,9 +7,9 @@ const initialState = {
 
 export const navigationReducer = (state = initialState, action = {}) => {
 	switch(action.type) {
-		case LOAD_HEADER_LINK:
+		case LOAD_PAGE:
 			return Object.assign({}, state, {pageValue: action.payload});
-		case LOAD_PRODUCT_PAGE:
+		case LOAD_PRODUCT:
 			return Object.assign({}, state, {productId: action.payload});
 		default:
 			return state;

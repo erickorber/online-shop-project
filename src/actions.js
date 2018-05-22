@@ -1,11 +1,11 @@
-import { LOAD_HEADER_LINK, LOAD_PRODUCT_PAGE } from './constants.js';
+import { LOAD_PAGE, LOAD_PRODUCT } from './constants.js';
 
-export const setPageToLoadFromHeaderLink = (pageValue) => ({
-	type: LOAD_HEADER_LINK,
+export const setPageToLoad = (pageValue) => ({
+	type: LOAD_PAGE,
 	payload: pageValue
 })
 
-export const setProductPageToLoadFromId = (productId) => ({
-	type: LOAD_PRODUCT_PAGE,
+export const setProductToLoad = (productId) => ({
+	type: LOAD_PRODUCT,
 	payload: productId
 })
