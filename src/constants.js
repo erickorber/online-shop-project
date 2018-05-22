@@ -1,1 +1,2 @@
 export const LOAD_HEADER_LINK = 'LOAD_HEADER_LINK';
+export const LOAD_PRODUCT_PAGE = 'LOAD_PRODUCT_PAGE';
