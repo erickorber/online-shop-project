@@ -7,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { loadPageFromHeaderLink } from './reducers.js';
+import { navigationReducer } from './reducers.js';
 
-const store = createStore(loadPageFromHeaderLink, applyMiddleware(logger));
+const store = createStore(navigationReducer, applyMiddleware(logger));
 
 ReactDOM.render(<Provider store = {store}>
 				  <App />
