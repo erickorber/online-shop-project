@@ -14,7 +14,7 @@ const Header = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            {isCurrentPageActive("Products", props.page, props.click)}
+            {isCurrentPageActive("ProductList", props.page, props.click)}
           </li>
           <li className="nav-item">
             {isCurrentPageActive("About", props.page, props.click)}
