@@ -2,7 +2,7 @@ import React from 'react';
 
 const Product = (props) => {
 	return (
-		<div>
+		<div className="container">
 			<div className="row page-title-spacing">
 				<div className="col-12">
 					<h3 className="slight-shadow text-center">Product Name</h3>
@@ -16,7 +16,7 @@ const Product = (props) => {
 				<div className="col-md-6">
 
 					<img className="card-img-top rounded mb-3"
-					src="" alt="Product image for product-name"></img>
+					src="" alt="product-name"></img>
 
 					<div className="btn btn-block mb-4 mt-2">
 						Buy Now Button
