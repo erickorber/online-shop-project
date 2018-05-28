@@ -5,9 +5,9 @@ const Header = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-      <button className="navbar-brand mr-5" type="button" value="ProductList" onClick={props.click}></button>
+      <button className="navbar-brand mr-5 header-btn" type="button" value="ProductList" onClick={props.click}></button>
 
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button className="navbar-toggler header-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
@@ -30,9 +30,9 @@ const Header = (props) => {
 
 function isCurrentPageActive(linkText, propsPageValue, clickFunction) {
   if (linkText === propsPageValue) {
-    return <button className="nav-link active px-3 mx-auto" value={linkText} onClick={clickFunction}>{linkText}</button>;
+    return <button className="nav-link active px-3 mx-auto header-btn" value={linkText} onClick={clickFunction}>{linkText}</button>;
   }
-  return <button className="nav-link px-3 mx-auto" value={linkText} onClick={clickFunction}>{linkText}</button>;
+  return <button className="nav-link px-3 mx-auto header-btn" value={linkText} onClick={clickFunction}>{linkText}</button>;
 }
 
 export default Header;
