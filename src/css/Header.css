@@ -1,19 +1,5 @@
-.header-btn, .header-btn:focus {
-	border: none;
-	outline: none;
-	background-color: transparent;
-	margin: 7px;
-	font-family: karmaMedium;
-	font-size: 18px;
-}
-
 .navbar {
 	border-bottom: 1px solid #dee2e6;
-}
-
-@font-face {
-    font-family: karmaMedium;
-    src: url(../fonts/karma-medium.ttf);
 }
 
 .navbar-brand {
@@ -28,6 +14,15 @@
 
 .navbar-toggler:active {
 	background-color: #1e1e1e17;
+}
+
+.header-btn, .header-btn:focus {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	margin: 7px;
+	font-family: karmaMedium;
+	font-size: 18px;
 }
 
 @media only screen and (max-width: 991.98px) {
