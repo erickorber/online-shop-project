@@ -5,7 +5,7 @@ import Header from '../components/Header.js';
 import About from '../components/pages/About.js'
 import Error404 from '../components/pages/Error404.js'
 import Contact from '../components/pages/Contact.js'
-import ProductList from '../components/pages/ProductList.js'
+import Shop from '../components/pages/Shop.js'
 import Product from '../components/pages/Product.js'
 
 import { setPageToLoad, setProductToLoad } from '../actions.js';
@@ -36,8 +36,8 @@ class App extends Component {
         return <Error404 />
       case 'Product' : 
         return <Product productId = {id} />
-      case 'ProductList' :
-        return <ProductList productClickFunction = {productClick} />
+      case 'Shop' :
+        return <Shop productClickFunction = {productClick} />
       default:
         return <Error404 />
     }

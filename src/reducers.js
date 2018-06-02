@@ -1,7 +1,7 @@
 import { LOAD_PAGE, LOAD_PRODUCT } from './constants.js';
 
 const initialState = {
-	pageValue: 'ProductList',
+	pageValue: 'Shop',
 	productId: 'none'
 }
 

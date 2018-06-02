@@ -5,7 +5,7 @@ const Header = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-      <button className="navbar-brand mr-5 header-btn" type="button" value="ProductList" onClick={props.click}></button>
+      <button className="navbar-brand mr-5 header-btn" type="button" value="Shop" onClick={props.click}></button>
 
       <button className="navbar-toggler header-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@ const Header = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            {isCurrentPageActive("ProductList", props.page, props.click)}
+            {isCurrentPageActive("Shop", props.page, props.click)}
           </li>
           <li className="nav-item">
             {isCurrentPageActive("About", props.page, props.click)}
