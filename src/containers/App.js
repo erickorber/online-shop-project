@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../css/App.css';
 import Header from '../components/Header.js';
-import About from '../components/pages/About.js'
-import Error404 from '../components/pages/Error404.js'
-import Contact from '../components/pages/Contact.js'
-import Shop from '../components/pages/Shop.js'
-import Product from '../components/pages/Product.js'
+import About from '../components/pages/About.js';
+import Error404 from '../components/pages/Error404.js';
+import Contact from '../components/pages/Contact.js';
+import Shop from '../components/pages/Shop.js';
+import Product from '../components/pages/Product.js';
 
 import { setPageToLoad, setProductToLoad } from '../actions.js';
 
