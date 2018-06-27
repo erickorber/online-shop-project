@@ -1,4 +1,4 @@
-import { LOAD_PAGE, LOAD_PRODUCT } from './constants.js';
+import { LOAD_PAGE, LOAD_PRODUCT, UPDATE_CART } from './constants.js';
 import { combineReducers } from 'redux';
 
 const initialNavigationState = {
@@ -7,6 +7,10 @@ const initialNavigationState = {
 
 const initialProductState = {
 	productId: '3'
+}
+
+const initialUserState = {
+	cartIds: []
 }
 
 export const navigationReducer = (state = initialNavigationState, action = {}) => {
@@ -29,7 +33,17 @@ export const productReducer = (state = initialProductState, action = {}) => {
 	}
 }
 
+export const userReducer = (state = initialUserState, action = {}) => {
+	switch(action.type) {
+		case UPDATE_CART:
+			return Object.assign({}, state, {cartIds: action.payload});
+		default:
+			return state;
+	}
+}
+
 export const rootReducer = combineReducers({
 	navigation: navigationReducer,
-	product: productReducer
+	product: productReducer,
+	user: userReducer
 })
