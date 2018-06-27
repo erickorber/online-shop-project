@@ -2,13 +2,13 @@ import React from 'react';
 
 const ContactForm = () => {
 	return (
-		<form id="contact-form" action="sendMessage" modelAttribute="email">
+		<form id="contact-form" action="sendMessage">
 			<div className="form-row">
 				<div className="col-12 col-md-6">
 					<input type="text" className="form-control mb-3" placeholder="First Name"/>
 				</div>
 				<div className="col-12 col-md-6">
-					<input type="email" className="form-control mb-3" placeholder="Email"/>
+					<input type="email" className="form-control mb-3" placeholder="Email" autoComplete="email"/>
 				</div>
 			</div>
 			<div className="form-row">
@@ -23,7 +23,7 @@ const ContactForm = () => {
 			</div>
 			<div className="form-row">
 				<div className="col-12">
-					<button type="submit" class="btn btn-lg btn-primary btn-block mb-2">Send Message</button>
+					<button type="submit" className="btn btn-lg btn-primary btn-block mb-2">Send Message</button>
 				</div>
 			</div>
 		</form>
