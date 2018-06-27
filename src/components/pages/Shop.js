@@ -1,6 +1,19 @@
 import React from 'react';
+import ProductCard from '../ProductCard.js';
 
-const Shop = (props) => {
+const Shop = ({products}) => {
+
+	const productCardList = products.map((product, i) => {
+		return (
+			<ProductCard 
+				key = { i }
+				id = { products[i].id } 
+				productName = { products[i].name } 
+				price = { products[i].price } 
+			/>
+		);
+	})
+
 	return (
 		<div className="container">
 			<div className="row page-title-spacing">
@@ -9,19 +22,8 @@ const Shop = (props) => {
 				</div>
 			</div>
 
-			<div className="row">		
-				<div className="col-12 col-sm-6 col-md-4 col-lg-3">			
-					<button className="card mx-2 mb-4" type="button">
-		
-						<img className="card-img-top" src="" alt="Product"></img>			
-						
-						<div className="card-body">
-							<h5 className="card-title text-center">Product Name</h5>
-							<p className="card-text text-center">$X.xx</p>
-						</div>
-					
-					</button>
-				</div>
+			<div className="row">	
+				{productCardList}	
 			</div>
 		</div>
 	);
