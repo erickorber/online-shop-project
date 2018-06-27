@@ -3,8 +3,6 @@ import { products } from '../../products.js';
 
 const Product = ({id}) => {
 
-	alert(id);
-
 	const checkId = (product) => {
 		return product.id.toString() === id;
 	}
