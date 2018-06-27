@@ -7,26 +7,27 @@ import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
 import Shop from '../components/pages/Shop.js';
 import Product from '../components/pages/Product.js';
+import { products } from '../products.js';
+import { setPageToLoad } from '../actions.js';
 
-import { setPageToLoad, setProductToLoad } from '../actions.js';
-
+//This is what the state currently is
 const mapStateToProps = (state) => {
 	return {
-		pageValue: state.pageValue,
-    productId: state.productId
+		pageValue: state.navigation.pageValue,
+    productId: state.product.productId
 	}
 }
 
+//This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onLinkClick: (clickedLink) => dispatch(setPageToLoad(clickedLink.target.value)),
-    onProductClick: (id) => dispatch(setProductToLoad(id.target.value))  
+		onLinkClick: (clickedLink) => dispatch(setPageToLoad(clickedLink.target.value)) 
 	}
 }
 
 class App extends Component {
 
-  getPageToLoad(page, productClick, id) {
+  getPageToLoad(page, id) {
     switch (page) {
       case 'About' :
         return <About />
@@ -35,9 +36,9 @@ class App extends Component {
       case 'Error404' :
         return <Error404 />
       case 'Product' : 
-        return <Product productId = {id} />
+        return <Product id = {id} />
       case 'Shop' :
-        return <Shop productClickFunction = {productClick} />
+        return <Shop products = { products } />
       default:
         return <Error404 />
     }
@@ -45,12 +46,12 @@ class App extends Component {
 
   render() {
 
-  	const { pageValue, onLinkClick, productId, onProductClick } = this.props;
+  	const { pageValue, onLinkClick, productId } = this.props;
 
     return (
       <div>
         <Header page = {pageValue} click = {onLinkClick} />
-        {this.getPageToLoad(pageValue, onProductClick, productId)}
+        {this.getPageToLoad(pageValue, productId)}
       </div>
     );
   }
