@@ -4,7 +4,7 @@ import { products } from '../../products.js';
 const Product = ({id}) => {
 
 	const checkId = (product) => {
-		return product.id.toString() === id;
+		return product.id === id;
 	}
 
 	const productToDisplay = products.find(checkId);

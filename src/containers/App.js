@@ -7,6 +7,7 @@ import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
 import Shop from '../components/pages/Shop.js';
 import Product from '../components/pages/Product.js';
+import Cart from '../components/pages/Cart.js';
 import { products } from '../products.js';
 import { setPageToLoad } from '../actions.js';
 
@@ -14,7 +15,7 @@ import { setPageToLoad } from '../actions.js';
 const mapStateToProps = (state) => {
 	return {
 		pageValue: state.navigation.pageValue,
-    productId: state.product.productId
+    	productId: state.product.productId
 	}
 }
 
@@ -39,6 +40,8 @@ class App extends Component {
         return <Product id = {id} />
       case 'Shop' :
         return <Shop products = { products } />
+      case 'Cart' :
+      	return <Cart productIdArray = {[[1, 1], [3, 2], [2, 1]]} />
       default:
         return <Error404 />
     }

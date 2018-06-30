@@ -17,7 +17,7 @@ class ProductCard extends Component {
 
 		return (
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3">			
-				<button className="card mx-2 mb-4" type="button" onClick={() => productCardClick(id.toString())}>
+				<button className="card mx-2 mb-4" type="button" onClick={() => productCardClick(id)}>
 					<img className="card-img-top" src="" alt="Product"></img>			
 					
 					<div className="card-body">

@@ -2,11 +2,11 @@ import { LOAD_PAGE, LOAD_PRODUCT, UPDATE_CART } from './constants.js';
 import { combineReducers } from 'redux';
 
 const initialNavigationState = {
-	pageValue: 'Shop'
+	pageValue: 'Cart'
 }
 
 const initialProductState = {
-	productId: '3'
+	productId: 1
 }
 
 const initialUserState = {
