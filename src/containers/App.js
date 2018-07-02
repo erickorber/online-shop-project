@@ -41,7 +41,7 @@ class App extends Component {
       case 'Shop' :
         return <Shop products = { products } />
       case 'Cart' :
-      	return <Cart productIdArray = {[[1, 1], [3, 2], [2, 1]]} />
+      	return <Cart cartArray = {[[1, 1], [3, 2], [2, 1]]} />
       default:
         return <Error404 />
     }

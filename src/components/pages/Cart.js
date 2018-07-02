@@ -1,17 +1,17 @@
 import React from 'react';
 import { products } from '../../products.js';
 
-const Cart = ({productIdArray}) => {
+const Cart = ({cartArray}) => {
 
 	const cartProducts = [];
 
-	for (let i = 0; i < productIdArray.length; i++) {
+	for (let i = 0; i < cartArray.length; i++) {
 
 		const checkId = (jsonProduct) => {
-			return jsonProduct.id === productIdArray[i][0];
+			return jsonProduct.id === cartArray[i][0];
 		}
 
-		cartProducts.push([products.find(checkId), productIdArray[i][1]]);
+		cartProducts.push([products.find(checkId), cartArray[i][1]]);
 	}
 
 	const displayItemsInCart = (list) => {
