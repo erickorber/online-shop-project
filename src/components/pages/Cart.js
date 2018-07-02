@@ -52,22 +52,29 @@ const Cart = ({productIdArray}) => {
 
 			<div className="row">
 				<div className="col-12">
-					<table className="table table-bordered table-striped">
-					  	<thead>
-					    	<tr>
-							    <th scope="col">Product</th>
-							    <th scope="col" className="text-center">Quantity</th>
-							    <th scope="col" className="text-center">Price</th>
-					    	</tr>
-					  	</thead>
-					  	<tbody>
-					  		{displayItemsInCart(cartProducts)}
-					  		<tr>
-					  			<th scope="row" colSpan="2">Total</th>
-					  			<td className="text-center">${displayTotalPrice(cartProducts)}</td>
-					  		</tr>
-					  	</tbody>
-					</table>	
+					{ (cartProducts.length !== 0) ? 
+						
+						(<table className="table table-bordered table-striped">
+						  	<thead>
+						    	<tr>
+								    <th scope="col">Product</th>
+								    <th scope="col" className="text-center">Quantity</th>
+								    <th scope="col" className="text-center">Price</th>
+						    	</tr>
+						  	</thead>
+						  	<tbody>
+						  		{displayItemsInCart(cartProducts)}
+						  		<tr>
+						  			<th scope="row" colSpan="2">Total</th>
+						  			<td className="text-center">${displayTotalPrice(cartProducts)}</td>
+						  		</tr>
+						  	</tbody>
+						</table>)
+						:
+						(<p className="text-center">There doesn't seem to be anyhing in your cart right now. 
+							Check out the shop if you'd like to order something special!</p>)
+
+					}
 				</div>
 			</div>
 			<div className="row my-2">
