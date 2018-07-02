@@ -23,7 +23,7 @@ class AddToCartButton extends Component {
 		const { id, quantity, dispatchUpdatedCart, cartItems } = this.props;
 
 		const buttonClick = (id, quantity, cartItems) => {
-			console.log(id, quantity)
+
 			const newCart = cartItems;
 
 			newCart.push([id, quantity]);
