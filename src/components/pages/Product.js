@@ -27,7 +27,7 @@ const Product = ({id}) => {
 					<img className="card-img-top rounded mb-3"
 					src="" alt={ productToDisplay.name }></img>
 
-					<AddToCartButton id = {id} quantity = {1} />
+					<AddToCartButton id = {id} />
 
 				</div>
 				<div className="col-md-6">	

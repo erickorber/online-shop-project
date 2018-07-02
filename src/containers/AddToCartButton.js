@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateCart } from '../actions.js';
+import '../css/AddToCartButton.css';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -20,7 +21,13 @@ class AddToCartButton extends Component {
 
 	render() {
 
-		const { id, quantity, dispatchUpdatedCart, cartItems } = this.props;
+		const { id, dispatchUpdatedCart, cartItems } = this.props;
+		let currentQuantity = 1;
+
+		const changeQuantity = (event) => {
+			currentQuantity = Number(event.target.value);
+
+		}
 
 		const buttonClick = (id, quantity, cartItems) => {
 
@@ -47,8 +54,24 @@ class AddToCartButton extends Component {
 		}
 
 		return (
-			<button className="btn btn-primary btn-block mb-3 mt-2 py-2" type="button"
-				onClick={() => buttonClick(id, quantity, cartItems)}>Add To Cart</button>
+			<div>
+				
+				<button className="btn btn-primary add-to-cart-button" type="button"
+						onClick={() => buttonClick(id, currentQuantity, cartItems)}>Add To Cart</button>
+
+				<select className="custom-select quantity-selector" defaultValue={currentQuantity} onChange={changeQuantity}>
+					<option value={1}>1</option>
+					<option value={2}>2</option>
+					<option value={3}>3</option>
+					<option value={4}>4</option>
+					<option value={5}>5</option>
+					<option value={6}>6</option>
+					<option value={7}>7</option>
+					<option value={8}>8</option>
+					<option value={9}>9</option>
+				</select>
+
+			</div>
 		);
 	}
 }
