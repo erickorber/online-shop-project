@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateCart } from '../actions.js';
 import '../css/AddToCartButton.css';
+import QuantityDropdownSelector from '../components/QuantityDropdownSelector.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -59,17 +60,8 @@ class AddToCartButton extends Component {
 				<button className="btn btn-primary add-to-cart-button" type="button"
 						onClick={() => buttonClick(id, currentQuantity, cartItems)}>Add To Cart</button>
 
-				<select className="custom-select quantity-selector" defaultValue={currentQuantity} onChange={changeQuantity}>
-					<option value={1}>1</option>
-					<option value={2}>2</option>
-					<option value={3}>3</option>
-					<option value={4}>4</option>
-					<option value={5}>5</option>
-					<option value={6}>6</option>
-					<option value={7}>7</option>
-					<option value={8}>8</option>
-					<option value={9}>9</option>
-				</select>
+				<QuantityDropdownSelector currentQuantity={currentQuantity} 
+					changeQuantity={changeQuantity} />
 
 			</div>
 		);
