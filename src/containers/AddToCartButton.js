@@ -26,7 +26,22 @@ class AddToCartButton extends Component {
 
 			const newCart = cartItems;
 
-			newCart.push([id, quantity]);
+			let n = 0;
+
+			//If the item being added to cart already is in the cart,
+			//then just update the quantity
+			for (var i = 0; i < newCart.length; i++) {
+				if(newCart[i][0] === id) {
+					newCart[i][1] += quantity;
+					break;
+				} else {
+					n++;
+				}
+			}
+
+			if (n === newCart.length) {
+				newCart.push([id, quantity]);				
+			}
 
 			dispatchUpdatedCart(newCart);
 		}
