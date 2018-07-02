@@ -10,8 +10,8 @@ export const setProductToLoad = (productId) => ({
 	payload: productId
 })
 
-export const updateCart = (cartIds) => ({
+export const updateCart = (cartItems) => ({
 	type: UPDATE_CART,
-	payload: cartIds
+	payload: cartItems
 })
 
