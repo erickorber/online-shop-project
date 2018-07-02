@@ -15,7 +15,8 @@ import { setPageToLoad } from '../actions.js';
 const mapStateToProps = (state) => {
 	return {
 		pageValue: state.navigation.pageValue,
-    	productId: state.product.productId
+    	productId: state.product.productId,
+    	cartItems: state.user.cartItems
 	}
 }
 
@@ -28,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class App extends Component {
 
-  getPageToLoad(page, id) {
+  getPageToLoad(page, id, cartItems) {
     switch (page) {
       case 'About' :
         return <About />
@@ -41,7 +42,7 @@ class App extends Component {
       case 'Shop' :
         return <Shop products = { products } />
       case 'Cart' :
-      	return <Cart cartArray = {[[1, 1], [3, 2], [2, 1]]} />
+      	return <Cart cartArray = { cartItems } />
       default:
         return <Error404 />
     }
@@ -49,12 +50,12 @@ class App extends Component {
 
   render() {
 
-  	const { pageValue, onLinkClick, productId } = this.props;
+  	const { pageValue, onLinkClick, productId, cartItems } = this.props;
 
     return (
       <div>
         <Header page = {pageValue} click = {onLinkClick} />
-        {this.getPageToLoad(pageValue, productId)}
+        {this.getPageToLoad(pageValue, productId, cartItems)}
       </div>
     );
   }
