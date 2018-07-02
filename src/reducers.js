@@ -10,7 +10,7 @@ const initialProductState = {
 }
 
 const initialUserState = {
-	cartIds: []
+	cartItems: []
 }
 
 export const navigationReducer = (state = initialNavigationState, action = {}) => {
@@ -36,7 +36,7 @@ export const productReducer = (state = initialProductState, action = {}) => {
 export const userReducer = (state = initialUserState, action = {}) => {
 	switch(action.type) {
 		case UPDATE_CART:
-			return Object.assign({}, state, {cartIds: action.payload});
+			return Object.assign({}, state, {cartItems: action.payload});
 		default:
 			return state;
 	}
