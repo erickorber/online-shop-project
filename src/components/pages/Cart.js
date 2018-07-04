@@ -1,5 +1,6 @@
 import React from 'react';
 import { products } from '../../products.js';
+import UpdateCartQuantity from '../../containers/UpdateCartQuantity.js';
 
 const Cart = ({cartArray}) => {
 
@@ -11,18 +12,22 @@ const Cart = ({cartArray}) => {
 			return jsonProduct.id === cartArray[i][0];
 		}
 
-		cartProducts.push([products.find(checkId), cartArray[i][1]]);
+		const quantity = cartArray[i][1];
+		cartProducts.push([products.find(checkId), quantity]);
 	}
 
-	const displayItemsInCart = (list) => {
+	const displayItemsInCart = (list, cart) => {
 		
 		const tableRows = [];
 		
 		for (let i = 0; i < list.length; i++) {
 			tableRows.push(
-				<tr key={i}>
+				<tr key={list[i][0].id}>
 					<th scope="row">{list[i][0].name}</th>
-					<td className="text-center">{list[i][1]}</td>
+					<td className="text-center">
+						<UpdateCartQuantity id={list[i][0].id} 
+							currentQuantity={list[i][1]} cartItems={cart} />
+					</td>
 					<td className="text-center">${list[i][0].price.toFixed(2)}</td>
 				</tr>
 			);
@@ -52,7 +57,7 @@ const Cart = ({cartArray}) => {
 
 			<div className="row">
 				<div className="col-12">
-					{ (cartProducts.length !== 0) ? 
+					{ (cartProducts.length > 0) ? 
 						
 						(<table className="table table-bordered table-striped">
 						  	<thead>
@@ -63,7 +68,7 @@ const Cart = ({cartArray}) => {
 						    	</tr>
 						  	</thead>
 						  	<tbody>
-						  		{displayItemsInCart(cartProducts)}
+						  		{displayItemsInCart(cartProducts, cartArray)}
 						  		<tr>
 						  			<th scope="row" colSpan="2">Total</th>
 						  			<td className="text-center">${displayTotalPrice(cartProducts)}</td>

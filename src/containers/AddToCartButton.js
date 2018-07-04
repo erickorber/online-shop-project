@@ -61,7 +61,7 @@ class AddToCartButton extends Component {
 						onClick={() => buttonClick(id, currentQuantity, cartItems)}>Add To Cart</button>
 
 				<QuantityDropdownSelector currentQuantity={currentQuantity} 
-					changeQuantity={changeQuantity} />
+					changeQuantity={changeQuantity} addToCartCSS={true} />
 
 			</div>
 		);
