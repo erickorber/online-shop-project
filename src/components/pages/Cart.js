@@ -1,6 +1,7 @@
 import React from 'react';
 import { products } from '../../products.js';
 import UpdateCartQuantity from '../../containers/UpdateCartQuantity.js';
+import DeleteButton from '../../containers/DeleteButton.js';
 
 const Cart = ({cartArray}) => {
 
@@ -27,6 +28,7 @@ const Cart = ({cartArray}) => {
 					<td className="text-center">
 						<UpdateCartQuantity id={list[i][0].id} 
 							currentQuantity={list[i][1]} cartItems={cart} />
+						<DeleteButton id={list[i][0].id} cartItems={cart} />
 					</td>
 					<td className="text-center">${list[i][0].price.toFixed(2)}</td>
 				</tr>
