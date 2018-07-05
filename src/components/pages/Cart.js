@@ -84,11 +84,13 @@ const Cart = ({cartArray}) => {
 					}
 				</div>
 			</div>
-			<div className="row my-2">
-				<div className="col-8 offset-2">
-					<button className="btn btn-primary btn-block" type="button" value="add cart">PayPal Placeholder</button>
+			{ (cartProducts.length > 0) &&
+				<div className="row my-2">
+					<div className="col-8 offset-2">
+						<button className="btn btn-primary btn-block" type="button" value="add cart">PayPal Placeholder</button>
+					</div>
 				</div>
-			</div>
+			}
 		</div>
 	);
 }
