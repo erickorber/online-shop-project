@@ -7,6 +7,23 @@
 	background-size: contain;
 }
 
+.navbar-toggler {
+	margin-left: 19px !important;
+}
+
+.fa-layers-counter {
+	height: 65px;
+	width: 82px;
+	font-size: 50px;
+	left: -48px;
+	top: -9px;
+}
+
+#cart-header-icon {
+	font-size: 28px;
+	margin-right: -2px;
+}
+
 .navbar-toggler:focus {
 	font-size: 1.25rem;
 	border: 1px solid rgba(0, 0, 0, 0.1);
@@ -29,6 +46,11 @@
 	.navbar-brand {
 		height: 70px;
 		width: 70px;
+	}
+
+	.cart-header-btn {
+		height:70px;
+		width: 50px;
 	}
 }
 

@@ -15,15 +15,15 @@ import { setPageToLoad } from '../actions.js';
 const mapStateToProps = (state) => {
 	return {
 		pageValue: state.navigation.pageValue,
-    	productId: state.product.productId,
-    	cartItems: state.user.cartItems
+    productId: state.product.productId,
+    cartItems: state.user.cartItems
 	}
 }
 
 //This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onLinkClick: (clickedLink) => dispatch(setPageToLoad(clickedLink.target.value)) 
+		onLinkClick: (clickedLink) => dispatch(setPageToLoad(clickedLink)) 
 	}
 }
 
@@ -48,13 +48,25 @@ class App extends Component {
     }
   }
 
+  getTotalCartQuantity(cartArray) {
+      
+    let totalQuantity = 0;
+
+    cartArray.forEach((item, i) => {
+      totalQuantity += item[1];
+    });
+
+    return totalQuantity;
+  }
+
   render() {
 
   	const { pageValue, onLinkClick, productId, cartItems } = this.props;
 
+    const totalQuantity = this.getTotalCartQuantity(cartItems);
     return (
       <div>
-        <Header page = {pageValue} click = {onLinkClick} />
+        <Header page = {pageValue} click = {onLinkClick} totalQuantity={totalQuantity} />
         {this.getPageToLoad(pageValue, productId, cartItems)}
       </div>
     );
