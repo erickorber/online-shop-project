@@ -3,10 +3,10 @@ import '../css/Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-const Header = (props) => {
+const Header = ({ page, click, totalQuantity }) => {
 
   const onLinkClick = (pageToLoad) => {
-    props.click(pageToLoad);
+    click(pageToLoad);
   }
 
   return (
@@ -17,7 +17,7 @@ const Header = (props) => {
       <button className=" cart-header-btn header-btn text-center align-middle" type="button" onClick={() => onLinkClick("Cart")}>
         <span className="fa-layers fa-fw text-center align-middle">
           <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
-          <span className="fa-layers-counter">{props.totalQuantity}</span>
+          <span className="fa-layers-counter">{totalQuantity}</span>
         </span>
       </button>
 
@@ -28,13 +28,13 @@ const Header = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            {isCurrentPageActive("Shop", props.page, onLinkClick)}
+            {isCurrentPageActive("Shop", page, onLinkClick)}
           </li>
           <li className="nav-item">
-            {isCurrentPageActive("About", props.page, onLinkClick)}
+            {isCurrentPageActive("About", page, onLinkClick)}
           </li>
           <li className="nav-item">
-            {isCurrentPageActive("Contact", props.page, onLinkClick)}
+            {isCurrentPageActive("Contact", page, onLinkClick)}
           </li>
         </ul>
       </div>
