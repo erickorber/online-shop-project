@@ -8,7 +8,6 @@ const Header = (props) => {
   const onLinkClick = (pageToLoad) => {
     props.click(pageToLoad);
   }
-  console.log(props.totalQuantity); 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
