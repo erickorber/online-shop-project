@@ -17,7 +17,9 @@ const Header = ({ page, click, totalQuantity }) => {
       <button className=" cart-header-btn header-btn text-center align-middle" type="button" onClick={() => onLinkClick("Cart")}>
         <span className="fa-layers fa-fw text-center align-middle">
           <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
-          <span className="fa-layers-counter">{totalQuantity}</span>
+          { (totalQuantity > 0) &&
+            <span className="fa-layers-counter">{totalQuantity}</span>
+          }
         </span>
       </button>
 
