@@ -58,5 +58,6 @@
 	.navbar-brand {
 		height: 90px;
 		width: 90px;
+		margin-right: 25px !important;
 	}
 }

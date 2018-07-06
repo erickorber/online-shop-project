@@ -14,7 +14,8 @@ const Header = ({ page, click, totalQuantity }) => {
 
       <button id="header-toggler" className="navbar-brand header-btn" type="button" onClick={() => onLinkClick("Shop")}></button>
       
-      <button className=" cart-header-btn header-btn text-center align-middle" type="button" onClick={() => onLinkClick("Cart")}>
+      {/* Shown only on mobile-sized screens */}
+      <button className="d-lg-none cart-header-btn header-btn text-center align-middle" type="button" onClick={() => onLinkClick("Cart")}>
         <span className="fa-layers fa-fw text-center align-middle">
           <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
           { (totalQuantity > 0) &&
@@ -40,6 +41,15 @@ const Header = ({ page, click, totalQuantity }) => {
           </li>
         </ul>
       </div>
+
+      <button className="d-none d-lg-inline mr-4 cart-header-btn header-btn text-center align-middle" type="button" onClick={() => onLinkClick("Cart")}>
+        <span className="fa-layers fa-fw text-center align-middle">
+          <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
+          { (totalQuantity > 0) &&
+            <span className="fa-layers-counter">{totalQuantity}</span>
+          }
+        </span>
+      </button>
     </nav>
   );
 }
