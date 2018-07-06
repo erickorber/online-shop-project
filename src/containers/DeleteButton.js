@@ -40,11 +40,11 @@ class DeleteButton extends Component {
 
 		return (
 			<div>
-				<button className="btn delete-btn mt-2" type="button"
+				<button className="btn w-100 delete-btn mt-2" type="button"
 					onClick={() => this.updateQuantity(id, cartItems, dispatchUpdatedCart)}>
-					<FontAwesomeIcon className="text-center align-middle" icon={faTrashAlt} />
-				</button>
-				
+					<p className="delete-text text-center pr-2 d-none d-md-inline">Remove</p>
+					<FontAwesomeIcon className="text-center" icon={faTrashAlt} />
+				</button>				
 			</div>
 		);
 	}
