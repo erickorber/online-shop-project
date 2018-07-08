@@ -1,0 +1,27 @@
+@media only screen and (max-width: 399.98px) {
+	.card-width {
+		width: 250px;
+		height: 210px;
+	}
+}
+
+@media only screen and (min-width: 400px) and (max-width: 575.98px) {
+	.card-width {
+		width: 310px;
+		height: 200px;
+	}
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+	.card-width {
+		width: 220px;
+		height: 220px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.card-width {
+		width: 180px;
+		height: 220px;
+	}
+}
