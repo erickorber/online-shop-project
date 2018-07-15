@@ -1,3 +1,14 @@
+.product-link, .product-link:hover {
+	color: #1c1c1c;
+	text-decoration: none;
+}
+
+.product-link:hover {
+	-ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari */
+    transform: scale(1.05);
+}
+
 @media only screen and (max-width: 399.98px) {
 	.card-width {
 		width: 250px;

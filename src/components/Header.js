@@ -9,28 +9,26 @@ const Header = ({ page, totalQuantity }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-      <Link to={'/'}><button id="header-toggler" className="navbar-brand header-btn" type="button"></button></Link>
+      <Link to={'/'} className="navbar-brand header-link"></Link>
       
       {/* Shown only on mobile-sized screens */}
-      <Link to={'/cart'}>
-        <button className="d-lg-none cart-header-btn header-btn text-center align-middle" type="button">
-          <span className="fa-layers fa-fw text-center align-middle">
-            <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
+      <Link to={'/cart'} className="d-lg-none header-link">
+          <span className="fa-layers fa-fw mt-2">
+            <FontAwesomeIcon className="cart-icon" icon={faShoppingCart} />
             { (totalQuantity > 0) &&
               <span className="fa-layers-counter">{totalQuantity}</span>
             }
           </span>
-        </button>
       </Link>
 
-      <button className="navbar-toggler header-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            {isCurrentPageActive("Shop", page, "/shop")}
+            {isCurrentPageActive("Shop", page, "/")}
           </li>
           <li className="nav-item">
             {isCurrentPageActive("About", page, "/about")}
@@ -42,15 +40,13 @@ const Header = ({ page, totalQuantity }) => {
       </div>
 
     {/* Shown only on desktop-sized screens */}
-      <Link to={'/cart'}>
-        <button className="d-none d-lg-inline mr-4 cart-header-btn header-btn text-center align-middle" type="button">
-          <span className="fa-layers fa-fw text-center align-middle">
-            <FontAwesomeIcon id="cart-header-icon" className="text-center align-middle" icon={faShoppingCart} />
-            { (totalQuantity > 0) &&
-              <span className="fa-layers-counter">{totalQuantity}</span>
-            }
-          </span>
-        </button>
+      <Link to={'/cart'} className="d-none d-lg-inline mr-5 header-link">
+        <span className="fa-layers fa-fw text-center">
+          <FontAwesomeIcon className="cart-icon" icon={faShoppingCart} />
+          { (totalQuantity > 0) &&
+            <span className="fa-layers-counter">{totalQuantity}</span>
+          }
+        </span>
       </Link>
     </nav>
   );
@@ -58,9 +54,9 @@ const Header = ({ page, totalQuantity }) => {
 
 function isCurrentPageActive(linkText, propsPageValue, submitValue) {
   if (submitValue === propsPageValue) {
-    return <Link to={submitValue}><button className="nav-link active px-3 mx-auto header-btn">{linkText}</button></Link>;
+    return <Link to={submitValue} className="nav-link header-link text-center active">{linkText}</Link>;
   }
-  return <Link to={submitValue}><button className="nav-link px-3 mx-auto header-btn">{linkText}</button></Link>;
+  return <Link to={submitValue} className="nav-link header-link text-center">{linkText}</Link>;
 }
 
 export default Header;

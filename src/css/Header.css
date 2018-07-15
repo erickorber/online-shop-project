@@ -1,3 +1,10 @@
+.header-link {
+	background-color: transparent;
+	margin: 7px;
+	font-family: karmaMedium;
+	font-size: 18px;
+}
+
 .navbar {
 	border-bottom: 1px solid #dee2e6;
 }
@@ -8,7 +15,7 @@
 }
 
 .navbar-toggler {
-	margin-left: 19px !important;
+	margin-left: 42px;
 }
 
 .fa-layers-counter {
@@ -19,9 +26,9 @@
 	top: -9px;
 }
 
-#cart-header-icon {
+.cart-icon {
 	font-size: 28px;
-	margin-right: -2px;
+	color: #1c1c1c;
 }
 
 .navbar-toggler:focus {
@@ -33,24 +40,10 @@
 	background-color: #1e1e1e17;
 }
 
-.header-btn, .header-btn:focus {
-	border: none;
-	outline: none;
-	background-color: transparent;
-	margin: 7px;
-	font-family: karmaMedium;
-	font-size: 18px;
-}
-
 @media only screen and (max-width: 991.98px) {
 	.navbar-brand {
 		height: 70px;
 		width: 70px;
-	}
-
-	.cart-header-btn {
-		height:70px;
-		width: 50px;
 	}
 }
 
@@ -58,6 +51,6 @@
 	.navbar-brand {
 		height: 90px;
 		width: 90px;
-		margin-right: 25px !important;
+		margin-right: 25px;
 	}
 }
