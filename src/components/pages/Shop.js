@@ -7,7 +7,7 @@ const Shop = ({products}) => {
 		return (
 			<ProductCard 
 				key = { i }
-				id = { products[i].id } 
+				urlName = { products[i].urlName } 
 				productName = { products[i].name } 
 				price = { products[i].price } 
 			/>

@@ -53,7 +53,7 @@ class App extends Component {
           <Route exact path="/cart" render={() => (
             <Cart cartArray = { cartItems } />
           )}/>
-          <Route exact path="/product/:id" component={Product}/>
+          <Route exact path="/product/:urlName" component={Product}/>
           <Route path="*" component={Error404}/>
         </Switch>
       </div>

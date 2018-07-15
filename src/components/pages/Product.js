@@ -4,11 +4,11 @@ import AddToCartButton from '../../containers/AddToCartButton.js';
 
 const Product = (props) => {
 
-	const checkId = (product) => {
-		return product.id === Number(props.match.params.id);
+	const checkURLName = (product) => {
+		return product.urlName === props.match.params.urlName;
 	}
 
-	const productToDisplay = products.find(checkId);
+	const productToDisplay = products.find(checkURLName);
 
 	return (
 		<div className="container">
