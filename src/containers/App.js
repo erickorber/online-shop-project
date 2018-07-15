@@ -54,7 +54,7 @@ class App extends Component {
             <Cart cartArray = { cartItems } />
           )}/>
           <Route exact path="/product/:id" component={Product}/>
-
+          <Route path="*" component={Error404}/>
         </Switch>
       </div>
     );
