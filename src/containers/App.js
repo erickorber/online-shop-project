@@ -9,44 +9,17 @@ import Shop from '../components/pages/Shop.js';
 import Product from '../components/pages/Product.js';
 import Cart from '../components/pages/Cart.js';
 import { products } from '../products.js';
-import { setPageToLoad } from '../actions.js';
+import { Route, Switch } from 'react-router';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
 	return {
-		pageValue: state.navigation.pageValue,
-    productId: state.product.productId,
+		pathname: state.router.location.pathname,
     cartItems: state.user.cartItems
 	}
 }
 
-//This is for when you'd like to update the state
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onLinkClick: (clickedLink) => dispatch(setPageToLoad(clickedLink)) 
-	}
-}
-
 class App extends Component {
-
-  getPageToLoad(page, id, cartItems) {
-    switch (page) {
-      case 'About' :
-        return <About />
-      case 'Contact' :
-        return <Contact />
-      case 'Error404' :
-        return <Error404 />
-      case 'Product' : 
-        return <Product id = {id} />
-      case 'Shop' :
-        return <Shop products = { products } />
-      case 'Cart' :
-      	return <Cart cartArray = { cartItems } />
-      default:
-        return <Error404 />
-    }
-  }
 
   getTotalCartQuantity(cartArray) {
       
@@ -61,16 +34,31 @@ class App extends Component {
 
   render() {
 
-  	const { pageValue, onLinkClick, productId, cartItems } = this.props;
+  	const { pathname, cartItems, loadPage } = this.props;
 
     const totalQuantity = this.getTotalCartQuantity(cartItems);
+
     return (
       <div>
-        <Header page = {pageValue} click = {onLinkClick} totalQuantity={totalQuantity} />
-        {this.getPageToLoad(pageValue, productId, cartItems)}
+        <Header page = {pathname} click={loadPage} totalQuantity={totalQuantity} />
+        <Switch>
+          <Route exact path="/" render={() => (
+            <Shop products = { products } />
+            )}/>
+          <Route exact path="/shop" render={() => (
+            <Shop products = { products } />
+          )}/>
+          <Route exact path="/about" component={About}/>
+          <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/cart" render={() => (
+            <Cart cartArray = { cartItems } />
+          )}/>
+          <Route exact path="/product/:id" component={Product}/>
+
+        </Switch>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

@@ -8,7 +8,6 @@ import 'bootstrap/dist/js/bootstrap.js';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './reducers.js';
-import { Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, connectRouter, routerMiddleware } from 'connected-react-router';
 
@@ -21,11 +20,7 @@ const store = createStore(
 
 ReactDOM.render(<Provider store = {store}>
 					<ConnectedRouter history={history}>
-				  		<div> { /* your usual react-router v4 routing */ }
-					        <Switch>
-					        	<Route exact path="/" component={App} />
-					        </Switch>
-					    </div>
+				     	<App />
 				  	</ConnectedRouter>
 				</Provider>,
 				document.getElementById('root'));

@@ -2,10 +2,10 @@ import React from 'react';
 import { products } from '../../products.js';
 import AddToCartButton from '../../containers/AddToCartButton.js';
 
-const Product = ({id}) => {
+const Product = (props) => {
 
 	const checkId = (product) => {
-		return product.id === id;
+		return product.id === Number(props.match.params.id);
 	}
 
 	const productToDisplay = products.find(checkId);
@@ -27,7 +27,7 @@ const Product = ({id}) => {
 					<img className="card-img-top rounded mb-3"
 					src="" alt={ productToDisplay.name }></img>
 
-					<AddToCartButton id = {id} />
+					<AddToCartButton id = {productToDisplay.id} />
 
 				</div>
 				<div className="col-md-6">	
