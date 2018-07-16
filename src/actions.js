@@ -20,7 +20,7 @@ export const requestProductList = () => (dispatch) => {
 	
 	async function fetchFromServer() {
 		try{
-			const response = await fetch('http://localhost:3000/full-product-list');
+			const response = await fetch('http://localhost:3000/');
 			const data = await response.json();
 			dispatch({ type: REQUEST_PRODUCT_LIST_SUCCESS, payload: data });
 		} catch (error) {
