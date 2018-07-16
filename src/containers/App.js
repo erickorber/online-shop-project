@@ -8,7 +8,6 @@ import Contact from '../components/pages/Contact.js';
 import Shop from '../components/pages/Shop.js';
 import Product from '../components/pages/Product.js';
 import Cart from '../components/pages/Cart.js';
-import { products } from '../products.js';
 import { Route, Switch } from 'react-router';
 
 //This is what the state currently is
@@ -42,12 +41,7 @@ class App extends Component {
       <div>
         <Header page = {pathname} click={loadPage} totalQuantity={totalQuantity} />
         <Switch>
-          <Route exact path="/" render={() => (
-            <Shop products = { products } />
-            )}/>
-          <Route exact path="/shop" render={() => (
-            <Shop products = { products } />
-          )}/>
+          <Route exact path="/" component={Shop}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/cart" render={() => (

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { logger } from 'redux-logger';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -15,7 +16,7 @@ const history = createBrowserHistory();
 
 const store = createStore(
 	connectRouter(history)(rootReducer),
-	compose(applyMiddleware(routerMiddleware(history), logger))
+	compose(applyMiddleware(routerMiddleware(history), logger, thunkMiddleware))
 );
 
 ReactDOM.render(<Provider store = {store}>
