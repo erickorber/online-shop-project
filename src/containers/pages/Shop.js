@@ -27,30 +27,52 @@ class Shop extends Component {
 
 	render() {
 
-		const { productList } = this.props;
+		const { productList, error } = this.props;
 
-		const productCardList = productList.map((product, i) => {
-			return (
-				<ProductCard 
-					key = { i }
-					urlName = { productList[i].urlName } 
-					productName = { productList[i].name } 
-					price = { productList[i].price } 
-				/>
+		let pageContent;
+		let productCardList;
+
+		if (error !==  '') {
+			pageContent = (
+					<div className="row page-title-spacing">
+						<div className="col-12">
+							<h3 className="slight-shadow text-center">Sorry, there was an error in retrieving this content.</h3>
+						</div>
+					</div>
 			);
-		});
+		} else if (productList === undefined) {
+			pageContent = <div></div>;
+		} else {
+
+			productCardList = productList.map((product, i) => {
+				return (
+					<ProductCard 
+						key = { i }
+						urlName = { productList[i].urlName } 
+						productName = { productList[i].name } 
+						price = { productList[i].price } 
+					/>
+				);
+			});
+
+			pageContent = (
+				<div>
+					<div className="row page-title-spacing">
+						<div className="col-12">
+							<h2 className="text-center slight-shadow">Featured Products</h2>
+						</div>
+					</div>
+
+					<div className="row">	
+						{productCardList}	
+					</div>
+				</div>
+			);
+		}
 
 		return (
 			<div className="container">
-				<div className="row page-title-spacing">
-					<div className="col-12">
-						<h2 className="text-center slight-shadow">Featured Products</h2>
-					</div>
-				</div>
-
-				<div className="row">	
-					{productCardList}	
-				</div>
+				{pageContent}
 			</div>
 		);
 	}
