@@ -33,13 +33,13 @@ class App extends Component {
 
   render() {
 
-  	const { pathname, cartItems, loadPage } = this.props;
+  	const { pathname, cartItems } = this.props;
 
     const totalQuantity = this.getTotalCartQuantity(cartItems);
 
     return (
       <div>
-        <Header page = {pathname} click={loadPage} totalQuantity={totalQuantity} />
+        <Header page = {pathname} totalQuantity={totalQuantity} />
         <Switch>
           <Route exact path="/" component={Shop}/>
           <Route exact path="/about" component={About}/>
