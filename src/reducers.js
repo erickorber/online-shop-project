@@ -3,7 +3,10 @@ import {
 	UPDATE_CART, 
 	REQUEST_PRODUCT_LIST_PENDING,
 	REQUEST_PRODUCT_LIST_SUCCESS,
-	REQUEST_PRODUCT_LIST_FAILED 
+	REQUEST_PRODUCT_LIST_FAILED,
+	REQUEST_PRODUCT_PENDING,
+	REQUEST_PRODUCT_SUCCESS,
+	REQUEST_PRODUCT_FAILED  
 } from './constants.js';
 
 const initialUserState = {
@@ -13,6 +16,12 @@ const initialUserState = {
 const initialProductListState = {
 	isPending: false,
 	productList: [],
+	error: ''
+}
+
+const initialProductState = {
+	isPending: false,
+	product: undefined,
 	error: ''
 }
 
@@ -38,7 +47,21 @@ export const productListReducer = (state = initialProductListState, action = {})
 	}
 }
 
+export const productReducer = (state = initialProductState, action = {}) => {
+	switch(action.type) {
+		case REQUEST_PRODUCT_PENDING:
+			return Object.assign({}, state, { isPending: true });
+		case REQUEST_PRODUCT_SUCCESS:
+			return Object.assign({}, state, { isPending: false, product: action.payload });
+		case REQUEST_PRODUCT_FAILED:
+			return Object.assign({}, state, { isPending: false, error: action.payload });	
+		default:
+			return state;
+	}
+}
+
 export const rootReducer = combineReducers({
 	user: userReducer,
-	productList: productListReducer
+	productList: productListReducer,
+	product: productReducer
 })
