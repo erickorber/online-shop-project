@@ -5,8 +5,8 @@ import Header from '../components/Header.js';
 import About from '../components/pages/About.js';
 import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
-import Shop from '../components/pages/Shop.js';
-import Product from '../components/pages/Product.js';
+import Shop from './pages/Shop.js';
+import Product from './pages/Product.js';
 import Cart from '../components/pages/Cart.js';
 import { Route, Switch } from 'react-router';
 
