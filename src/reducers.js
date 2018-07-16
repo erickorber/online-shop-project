@@ -1,20 +1,10 @@
 import { combineReducers } from 'redux';
 import {
-	LOAD_PAGE, 
-	LOAD_PRODUCT, 
 	UPDATE_CART, 
 	REQUEST_PRODUCT_LIST_PENDING,
 	REQUEST_PRODUCT_LIST_SUCCESS,
 	REQUEST_PRODUCT_LIST_FAILED 
 } from './constants.js';
-
-const initialNavigationState = {
-	pageValue: 'Cart'
-}
-
-const initialProductState = {
-	productId: 1
-}
 
 const initialUserState = {
 	cartItems: []
@@ -24,26 +14,6 @@ const initialProductListState = {
 	isPending: false,
 	productList: [],
 	error: ''
-}
-
-export const navigationReducer = (state = initialNavigationState, action = {}) => {
-	switch(action.type) {
-		case LOAD_PAGE:
-			return Object.assign({}, state, {pageValue: action.payload});
-		case LOAD_PRODUCT:
-			return Object.assign({}, state, {pageValue: 'Product'});
-		default:
-			return state;
-	}
-}
-
-export const productReducer = (state = initialProductState, action = {}) => {
-	switch(action.type) {
-		case LOAD_PRODUCT:
-			return Object.assign({}, state, {productId: action.payload});
-		default:
-			return state;
-	}
 }
 
 export const userReducer = (state = initialUserState, action = {}) => {
@@ -69,8 +39,6 @@ export const productListReducer = (state = initialProductListState, action = {})
 }
 
 export const rootReducer = combineReducers({
-	navigation: navigationReducer,
-	product: productReducer,
 	user: userReducer,
 	productList: productListReducer
 })

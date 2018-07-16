@@ -1,21 +1,9 @@
-import {
-	LOAD_PAGE, 
-	LOAD_PRODUCT, 
+import { 
 	UPDATE_CART, 
 	REQUEST_PRODUCT_LIST_PENDING,
 	REQUEST_PRODUCT_LIST_SUCCESS,
 	REQUEST_PRODUCT_LIST_FAILED 
 } from './constants.js';
-
-export const setPageToLoad = (pageValue) => ({
-	type: LOAD_PAGE,
-	payload: pageValue
-})
-
-export const setProductToLoad = (productId) => ({
-	type: LOAD_PRODUCT,
-	payload: productId
-})
 
 export const updateCart = (cartItems) => ({
 	type: UPDATE_CART,
