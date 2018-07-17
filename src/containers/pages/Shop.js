@@ -40,7 +40,7 @@ class Shop extends Component {
 						</div>
 					</div>
 			);
-		} else if (productList === undefined) {
+		} else if (productList === undefined || productList.length === 0) {
 			pageContent = <div></div>;
 		} else {
 
