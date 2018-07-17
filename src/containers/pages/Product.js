@@ -61,7 +61,7 @@ class Product extends Component {
 							<h3 className="slight-shadow text-center">{ product.name }</h3>
 						</div>
 						<div className="col-12">
-							<h4 className="slight-shadow text-center">${ product.price.toFixed(2) } CAD</h4>
+							<h4 className="slight-shadow text-center">${ product.price } CAD</h4>
 						</div>
 					</div>
 
