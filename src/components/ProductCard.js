@@ -11,7 +11,7 @@ const ProductCard = ({urlName, productName, price}) => {
 				
 				<div className="card-body mx-auto">
 					<p className="card-title text-center font-weight-bold">{productName}</p>
-					<p className="card-text text-center">${price.toFixed(2)} CAD</p>
+					<p className="card-text text-center">${price} CAD</p>
 				</div>
 			</Link>	
 		</div>
