@@ -11,12 +11,15 @@ import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './reducers.js';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, connectRouter, routerMiddleware } from 'connected-react-router';
+import Cookies from 'js-cookie';
+import { createCookieMiddleware } from 'redux-cookie';
 
 const history = createBrowserHistory();
 
 const store = createStore(
 	connectRouter(history)(rootReducer),
-	compose(applyMiddleware(routerMiddleware(history), logger, thunkMiddleware))
+	compose(applyMiddleware(routerMiddleware(history), 
+		logger, thunkMiddleware, createCookieMiddleware(Cookies)))
 );
 
 ReactDOM.render(<Provider store = {store}>

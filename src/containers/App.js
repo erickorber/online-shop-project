@@ -9,6 +9,7 @@ import Shop from './pages/Shop.js';
 import Product from './pages/Product.js';
 import Cart from '../components/pages/Cart.js';
 import { Route, Switch } from 'react-router';
+import { getCookie } from 'redux-cookie';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -18,10 +19,17 @@ const mapStateToProps = (state) => {
 	}
 }
 
+//This is for when you'd like to update the state
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCartFromCookie: () => dispatch(getCookie('cartItems'))
+  }
+}
+
 class App extends Component {
 
   getTotalCartQuantity(cartArray) {
-      
+
     let totalQuantity = 0;
 
     cartArray.forEach((item, i) => {
@@ -33,9 +41,15 @@ class App extends Component {
 
   render() {
 
-  	const { pathname, cartItems } = this.props;
+  	const { pathname, cartItems, loadCartFromCookie } = this.props;
 
-    const totalQuantity = this.getTotalCartQuantity(cartItems);
+    let cartItemsToUse = cartItems;
+
+    if (navigator.cookieEnabled && loadCartFromCookie() !== undefined) {
+      cartItemsToUse = JSON.parse(loadCartFromCookie());
+    }
+
+    const totalQuantity = this.getTotalCartQuantity(cartItemsToUse);
 
     return (
       <div>
@@ -45,7 +59,7 @@ class App extends Component {
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/cart" render={() => (
-            <Cart cartArray = { cartItems } />
+            <Cart cartArray = { cartItemsToUse } />
           )}/>
           <Route exact path="/product/:urlName" component={Product}/>
           <Route path="*" component={Error404}/>
@@ -55,4 +69,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

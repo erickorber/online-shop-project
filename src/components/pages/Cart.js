@@ -1,23 +1,34 @@
-import React from 'react';
-import { products } from '../../products.js';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { requestCartList } from '../../actions.js';
 import UpdateCartQuantity from '../../containers/UpdateCartQuantity.js';
 import DeleteButton from '../../containers/DeleteButton.js';
 
-const Cart = ({cartArray}) => {
+//This is what the state currently is
+const mapStateToProps = (state) => {
+	return {
+		cartListFromServer: state.cartList.cartList,
+		error: state.cartList.error,
+		isPending: state.cartList.isPending
+	}
+}
 
-	const cartProducts = [];
+//This is for when you'd like to update the state
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onCartListRequest: (cartIds) => dispatch(requestCartList(cartIds))
+	}
+}
 
-	for (let i = 0; i < cartArray.length; i++) {
+class Cart extends Component {
 
-		const checkId = (jsonProduct) => {
-			return jsonProduct.id === cartArray[i][0];
+	componentDidMount() {
+		if (this.props.cartArray.length > 0) {
+			this.props.onCartListRequest(this.props.cartArray);			
 		}
-
-		const quantity = cartArray[i][1];
-		cartProducts.push([products.find(checkId), quantity]);
 	}
 
-	const displayItemsInCart = (list, cart) => {
+	displayItemsInCart(list,  cart) {
 		
 		const tableRows = [];
 		
@@ -30,7 +41,7 @@ const Cart = ({cartArray}) => {
 							currentQuantity={list[i][1]} cartItems={cart} />
 						<DeleteButton id={list[i][0].id} cartItems={cart} />
 					</td>
-					<td className="text-center">${list[i][0].price.toFixed(2)}</td>
+					<td className="text-center">${list[i][0].price}</td>
 				</tr>
 			);
 		}
@@ -38,7 +49,7 @@ const Cart = ({cartArray}) => {
 		return tableRows;
 	}
 
-	const displayTotalPrice = (list) => {
+	displayTotalPrice(list) {
 
 		let totalPrice = 0;
 
@@ -46,53 +57,102 @@ const Cart = ({cartArray}) => {
 			totalPrice += (list[i][0].price * list[i][1]);
 		}
 
-		return totalPrice.toFixed(2);
+		return totalPrice;
 	}
 
-	return (
-		<div className="container">
-			<div className="row page-title-spacing">
-				<div className="col-12">
-					<h2 className="text-center slight-shadow">Your Cart</h2>
-				</div>
-			</div>
+	render() {
 
-			<div className="row">
-				<div className="col-12">
-					{ (cartProducts.length > 0) ? 
-						
-						(<table className="table table-bordered table-striped">
-						  	<thead>
-						    	<tr>
-								    <th scope="col">Product</th>
-								    <th scope="col" className="text-center">Quantity</th>
-								    <th scope="col" className="text-center">Price</th>
-						    	</tr>
-						  	</thead>
-						  	<tbody>
-						  		{displayItemsInCart(cartProducts, cartArray)}
-						  		<tr>
-						  			<th scope="row" colSpan="2">Total</th>
-						  			<td className="text-center">${displayTotalPrice(cartProducts)}</td>
-						  		</tr>
-						  	</tbody>
-						</table>)
-						:
-						(<p className="text-center">There doesn't seem to be anyhing in your cart right now. 
-							Check out the shop if you'd like to order something special!</p>)
+		const { cartArray, cartListFromServer, error, isPending } = this.props;
 
-					}
-				</div>
-			</div>
-			{ (cartProducts.length > 0) &&
-				<div className="row my-2">
-					<div className="col-8 offset-2">
-						<button className="btn btn-primary btn-block" type="button" value="add cart">PayPal Placeholder</button>
-					</div>
-				</div>
+		const cartProducts = [];
+
+		if (cartListFromServer !== undefined
+			&& cartListFromServer.length > 0) {
+
+			for (let i = 0; i < cartArray.length; i++) {
+				const quantity = cartArray[i][1];
+				cartProducts.push([cartListFromServer[i], quantity]);
 			}
-		</div>
-	);
+		}
+
+		let pageContent;
+
+		if (error !== '') {
+			
+			pageContent =
+				(<div className="row page-title-spacing">
+					<div className="col-12">
+						<h3 className="slight-shadow text-center">Sorry, there was an error 
+						in retrieving your cart items.</h3>
+					</div>
+				</div>);
+
+		} else if (cartArray.length === 0) {
+			
+			pageContent =
+				(<div>
+					<div className="row page-title-spacing">
+						<div className="col-12">
+							<h2 className="text-center slight-shadow">Your Cart</h2>
+						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-12">
+							<p className="text-center">There doesn't seem to be anyhing 
+								in your cart right now. Check out the shop if you'd like 
+								to order something special!</p>
+						</div>
+					</div>
+				</div>);
+
+		} else if (cartArray.length > 0) {
+			
+			if (isPending) {
+				pageContent = <div></div>;
+			} else {
+				pageContent =
+					(<div>
+						<div className="row page-title-spacing">
+							<div className="col-12">
+								<h2 className="text-center slight-shadow">Your Cart</h2>
+							</div>
+						</div>
+
+						<div className="row">
+							<table className="table table-bordered table-striped">
+							  	<thead>
+							    	<tr>
+									    <th scope="col">Product</th>
+									    <th scope="col" className="text-center">Quantity</th>
+									    <th scope="col" className="text-center">Price</th>
+							    	</tr>
+							  	</thead>
+							  	<tbody>
+							  		{this.displayItemsInCart(cartProducts, cartArray)}
+							  		<tr>
+							  			<th scope="row" colSpan="2">Total</th>
+							  			<td className="text-center">${this.displayTotalPrice(cartProducts)}</td>
+							  		</tr>
+							  	</tbody>
+							</table>
+						</div>
+
+						<div className="row my-2">
+							<div className="col-8 offset-2">
+								<button className="btn btn-primary btn-block" type="button" value="add cart">PayPal Placeholder</button>
+							</div>
+						</div>
+					</div>);
+			}
+		}
+
+		return (
+			<div className="container">
+				{pageContent}
+			</div>
+		);
+	}
 }
 
-export default Cart;
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
