@@ -8,6 +8,7 @@ import Contact from '../components/pages/Contact.js';
 import Shop from './pages/Shop.js';
 import Product from './pages/Product.js';
 import Cart from '../components/pages/Cart.js';
+import AdminLogin from '../components/pages/AdminLogin.js';
 import { Route, Switch } from 'react-router';
 import { getCookie } from 'redux-cookie';
 
@@ -62,6 +63,7 @@ class App extends Component {
             <Cart cartArray = { cartItemsToUse } />
           )}/>
           <Route exact path="/product/:urlName" component={Product}/>
+          <Route exact path="/admin" component={AdminLogin}/>
           <Route path="*" component={Error404}/>
         </Switch>
       </div>
