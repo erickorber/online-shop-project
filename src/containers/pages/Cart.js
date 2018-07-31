@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestCartServerList } from '../../actions.js';
-import UpdateCartQuantity from '../../containers/UpdateCartQuantity.js';
-import DeleteButton from '../../containers/DeleteButton.js';
+import UpdateCartQuantity from '../UpdateCartQuantity.js';
+import DeleteButton from '../DeleteButton.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {

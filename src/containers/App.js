@@ -7,7 +7,7 @@ import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
 import Shop from './pages/Shop.js';
 import Product from './pages/Product.js';
-import Cart from '../components/pages/Cart.js';
+import Cart from '../containers/pages/Cart.js';
 import AdminLogin from '../components/pages/AdminLogin.js';
 import { Route, Switch } from 'react-router';
 import { getCookie } from 'redux-cookie';
