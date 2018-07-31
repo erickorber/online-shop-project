@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestCartList } from '../../actions.js';
+import { requestCartServerList } from '../../actions.js';
 import UpdateCartQuantity from '../../containers/UpdateCartQuantity.js';
 import DeleteButton from '../../containers/DeleteButton.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
 	return {
-		cartListFromServer: state.cartList.cartList,
-		error: state.cartList.error,
-		isPending: state.cartList.isPending
+		serverList: state.cartServerList.serverList,
+		error: state.cartServerList.error,
+		isPending: state.cartServerList.isPending,
+	    cart2DArrayProp: state.user.cartItems
 	}
 }
 
 //This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onCartListRequest: (cartIds) => dispatch(requestCartList(cartIds))
+		onServerListRequest: (cartIds) => dispatch(requestCartServerList(cartIds))
 	}
 }
 
 class Cart extends Component {
 
 	componentDidMount() {
-		if (this.props.cartArray.length > 0) {
-			this.props.onCartListRequest(this.props.cartArray);			
-		}
+		if (this.props.cart2DArrayProp.length > 0) {
+			this.props.onServerListRequest(this.props.cart2DArrayProp);
+		}	
 	}
 
-	displayItemsInCart(list,  cart) {
-		
+	displayItemsInCart(list, cart) {
 		const tableRows = [];
 		
 		for (let i = 0; i < list.length; i++) {
@@ -37,9 +37,9 @@ class Cart extends Component {
 				<tr key={list[i][0].id}>
 					<th scope="row">{list[i][0].name}</th>
 					<td className="text-center">
-						<UpdateCartQuantity id={list[i][0].id} 
-							currentQuantity={list[i][1]} cartItems={cart} />
-						<DeleteButton id={list[i][0].id} cartItems={cart} />
+						<UpdateCartQuantity id={cart[i][0]} 
+							currentQuantity={cart[i][1]} cartItems={cart} />
+						<DeleteButton id={cart[i][0]} cartItems={cart} />
 					</td>
 					<td className="text-center">${list[i][0].price}</td>
 				</tr>
@@ -62,16 +62,20 @@ class Cart extends Component {
 
 	render() {
 
-		const { cartArray, cartListFromServer, error, isPending } = this.props;
+		const { cart2DArrayProp, serverList, error, isPending } = this.props;
 
-		const cartProducts = [];
+		const cart2DArrayForHTMLTable = [];
 
-		if (cartListFromServer !== undefined
-			&& cartListFromServer.length > 0) {
+		if (serverList !== undefined
+			&& serverList.length > 0) {
 
-			for (let i = 0; i < cartArray.length; i++) {
-				const quantity = cartArray[i][1];
-				cartProducts.push([cartListFromServer[i], quantity]);
+			for (let i = 0; i < cart2DArrayProp.length; i++) {
+
+				const checkId = (serverProduct) => {
+					return serverProduct.id === cart2DArrayProp[i][0];
+				}
+
+				cart2DArrayForHTMLTable.push([serverList.find(checkId), cart2DArrayProp[i][1]]);
 			}
 		}
 
@@ -87,7 +91,11 @@ class Cart extends Component {
 					</div>
 				</div>);
 
-		} else if (cartArray.length === 0) {
+		} else if (isPending) {
+
+			pageContent = (<div></div>);
+
+		} else if (cart2DArrayProp.length === 0) {
 			
 			pageContent =
 				(<div>
@@ -106,11 +114,10 @@ class Cart extends Component {
 					</div>
 				</div>);
 
-		} else if (cartArray.length > 0) {
+		} else if (cart2DArrayForHTMLTable.length > 0) {
 			
-			if (isPending) {
-				pageContent = <div></div>;
-			} else {
+			if (cart2DArrayForHTMLTable.length <= serverList.length) {
+
 				pageContent =
 					(<div>
 						<div className="row page-title-spacing">
@@ -129,10 +136,10 @@ class Cart extends Component {
 							    	</tr>
 							  	</thead>
 							  	<tbody>
-							  		{this.displayItemsInCart(cartProducts, cartArray)}
+							  		{this.displayItemsInCart(cart2DArrayForHTMLTable, cart2DArrayProp)}
 							  		<tr>
 							  			<th scope="row" colSpan="2">Total</th>
-							  			<td className="text-center">${this.displayTotalPrice(cartProducts)}</td>
+							  			<td className="text-center">${this.displayTotalPrice(cart2DArrayForHTMLTable)}</td>
 							  		</tr>
 							  	</tbody>
 							</table>
@@ -144,7 +151,10 @@ class Cart extends Component {
 							</div>
 						</div>
 					</div>);
-			}
+
+			} else {
+				pageContent = (<div></div>);
+			}	
 		}
 
 		return (

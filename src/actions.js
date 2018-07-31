@@ -14,8 +14,10 @@ import { setCookie } from 'redux-cookie';
 
 export const updateCart = (cartItems) => (dispatch) => {
 	if (navigator.cookieEnabled) {
-		dispatch(setCookie('cartItems', cartItems, { expires: 365 }));
-	}
+		dispatch(setCookie('cart2DArrayCookie', cartItems, { expires: 365 }));
+	} 
+	
+	//We will always be prioritizing this state here, not the cookie 
 	dispatch({type: UPDATE_CART, payload: cartItems});
 }
 
@@ -51,22 +53,21 @@ export const requestProduct = (urlName) => (dispatch) => {
 	}
 }
 
-export const requestCartList = (cartIds) => (dispatch) => {
+export const requestCartServerList = (cartIds) => (dispatch) => {
 	
 	dispatch({ type: REQUEST_CART_LIST_PENDING });
 	
-	let ids = "";
+	let idsForURL = "";
 
 	for (let i = 0; i < cartIds.length; i++) {
-        ids = ids.concat(cartIds[i][0]);
+        idsForURL = idsForURL.concat(cartIds[i][0]);
     }
 
-    fetchFromServer(ids);
+    fetchFromServer(idsForURL);
 
 	async function fetchFromServer(idList) {
 		try{
 			const response = await fetch('http://localhost:3000/cart/' + idList);
-			console.log('http://localhost:3000/cart/' + idList);
 			const data = await response.json();
 			dispatch({ type: REQUEST_CART_LIST_SUCCESS, payload: data });
 		} catch (error) {

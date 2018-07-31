@@ -11,19 +11,21 @@ import Cart from '../components/pages/Cart.js';
 import AdminLogin from '../components/pages/AdminLogin.js';
 import { Route, Switch } from 'react-router';
 import { getCookie } from 'redux-cookie';
+import { updateCart } from '../actions.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
 	return {
 		pathname: state.router.location.pathname,
-    cartItems: state.user.cartItems
+    cartReduxState: state.user.cartItems
 	}
 }
 
 //This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCartFromCookie: () => dispatch(getCookie('cartItems'))
+    loadCartFromCookie: () => dispatch(getCookie('cart2DArrayCookie')),
+    dispatchUpdatedCart: (newCart) => dispatch(updateCart(newCart))
   }
 }
 
@@ -40,17 +42,40 @@ class App extends Component {
     return totalQuantity;
   }
 
+  makeDeepCopy(arrayToCopy) {
+    const newArray = arrayToCopy.map(
+      (item, i) => {
+        return item;
+      }
+    );
+
+    return newArray;
+  }
+
   render() {
 
-  	const { pathname, cartItems, loadCartFromCookie } = this.props;
+  	const { pathname, cartReduxState, loadCartFromCookie, dispatchUpdatedCart } = this.props;
 
-    let cartItemsToUse = cartItems;
+    let cartIdQuantityPair;  
 
-    if (navigator.cookieEnabled && loadCartFromCookie() !== undefined) {
-      cartItemsToUse = JSON.parse(loadCartFromCookie());
+    //Only check to see if cookies are required if the redux state is empty
+    if (cartReduxState.length === 0) {
+      //If cookies are enabled
+      if (navigator.cookieEnabled && loadCartFromCookie() !== undefined) {
+
+        cartIdQuantityPair = this.makeDeepCopy(JSON.parse(loadCartFromCookie()));
+
+        if (cartIdQuantityPair.length > 0) {
+          dispatchUpdatedCart(cartIdQuantityPair);          
+        }
+      } else {
+        cartIdQuantityPair = this.makeDeepCopy(cartReduxState);
+      }
+    } else {
+      cartIdQuantityPair = this.makeDeepCopy(cartReduxState);
     }
 
-    const totalQuantity = this.getTotalCartQuantity(cartItemsToUse);
+    const totalQuantity = this.getTotalCartQuantity(cartIdQuantityPair);
 
     return (
       <div>
@@ -59,9 +84,7 @@ class App extends Component {
           <Route exact path="/" component={Shop}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
-          <Route exact path="/cart" render={() => (
-            <Cart cartArray = { cartItemsToUse } />
-          )}/>
+          <Route exact path="/cart" component={Cart}/>
           <Route exact path="/product/:urlName" component={Product}/>
           <Route exact path="/admin" component={AdminLogin}/>
           <Route path="*" component={Error404}/>

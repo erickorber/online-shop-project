@@ -28,9 +28,9 @@ const initialProductState = {
 	error: ''
 }
 
-const initialCartListState = {
+const initialCartServerListState = {
 	isPending: false,
-	cartList: [],
+	serverList: [],
 	error: ''
 }
 
@@ -69,12 +69,12 @@ export const productReducer = (state = initialProductState, action = {}) => {
 	}
 }
 
-export const cartListReducer = (state = initialCartListState, action = {}) => {
+export const cartServerListReducer = (state = initialCartServerListState, action = {}) => {
 	switch(action.type) {
 		case REQUEST_CART_LIST_PENDING:
 			return Object.assign({}, state, { isPending: true });
 		case REQUEST_CART_LIST_SUCCESS:
-			return Object.assign({}, state, { isPending: false, cartList: action.payload });
+			return Object.assign({}, state, { isPending: false, serverList: action.payload });
 		case REQUEST_CART_LIST_FAILED:
 			return Object.assign({}, state, { isPending: false, error: action.payload });	
 		default:
@@ -86,5 +86,5 @@ export const rootReducer = combineReducers({
 	user: userReducer,
 	productList: productListReducer,
 	product: productReducer,
-	cartList: cartListReducer
+	cartServerList: cartServerListReducer
 })
