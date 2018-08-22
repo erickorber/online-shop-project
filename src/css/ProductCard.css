@@ -1,3 +1,7 @@
+.card-body {
+	padding: 0;
+}
+
 .product-link, .product-link:hover {
 	color: #1c1c1c;
 	text-decoration: none;
@@ -9,30 +13,80 @@
     transform: scale(1.05);
 }
 
-@media only screen and (max-width: 399.98px) {
+@media only screen and (max-width: 349.98px) {
 	.card-width {
 		width: 250px;
-		height: 210px;
+		padding: 5px;
 	}
-}
 
-@media only screen and (min-width: 400px) and (max-width: 575.98px) {
-	.card-width {
-		width: 310px;
-		height: 200px;
-	}
-}
-
-@media only screen and (min-width: 576px) and (max-width: 767.98px) {
-	.card-width {
+	.card-img-top {
 		width: 220px;
 		height: 220px;
 	}
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 350px) and (max-width: 399.98px) {
 	.card-width {
-		width: 180px;
+		width: 300px;
+		padding: 5px;
+	}
+
+	.card-img-top {
+		width: 270px;
+		height: 270px;
+	}
+}
+
+@media only screen and (min-width: 400px) and (max-width: 575.98px) {
+	.card-width {
+		width: 330px;
+		padding: 5px;
+	}
+
+	.card-img-top {
+		width: 300px;
+		height: 300px;
+	}
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+	.card {
+		min-height: 315px;
+	}
+
+	.card-width {
+		width: 250px;
+		padding: 5px;
+	}
+
+	.card-img-top {
+		width: 220px;
 		height: 220px;
+	}
+
+	.product-card-text {
+		font-size: 13px;
+		margin-bottom: 0px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.card {
+		min-height: 315px;
+	}
+
+	.card-width {
+		width: 220px;
+		padding: 5px;
+	}
+
+	.card-img-top {
+		width: 190px;
+		height: 190px;
+	}
+
+	.product-card-text {
+		font-size: 15px;
+		margin-bottom: 0px;
 	}
 }

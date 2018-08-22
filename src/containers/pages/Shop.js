@@ -48,9 +48,10 @@ class Shop extends Component {
 				return (
 					<ProductCard 
 						key = { i }
-						urlName = { productList[i].url_name } 
-						productName = { productList[i].name } 
-						price = { productList[i].price } 
+						urlName = { productList[i].url_name }
+						productName = { productList[i].name }
+						price = { productList[i].price }
+						img = { productList[i].img_url }
 					/>
 				);
 			});
