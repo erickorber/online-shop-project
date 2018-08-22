@@ -63,7 +63,7 @@ class AddToCartButton extends Component {
 		}
 
 		return (
-			<div>
+			<div className="mb-3">
 				
 				<button className="btn btn-primary add-to-cart-button" type="button"
 						onClick={() => buttonClick(id, currentQuantity, cartItems)}>Add To Cart</button>

@@ -68,8 +68,8 @@ class Product extends Component {
 					<div className="row">
 						<div className="col-md-6">
 
-							<img className="card-img-top rounded mb-3"
-							src="" alt={ product.name }></img>
+							<img className="product-img d-block mx-auto w-100 mb-3"
+							src={'http://localhost:3000/images/product/' + product.img_url} alt={ product.name }></img>
 
 							<AddToCartButton id = {product.id} />
 
