@@ -35,7 +35,11 @@ class Cart extends Component {
 		for (let i = 0; i < list.length; i++) {
 			tableRows.push(
 				<tr key={list[i][0].id}>
-					<th scope="row">{list[i][0].name}</th>
+					<th scope="row">
+						<img className="w-100 mx-auto my-1" src={'http://localhost:3000/images/product/' + list[i][0].img_url} 
+						alt={list[i][0].name}></img>
+						{list[i][0].name}
+					</th>
 					<td className="text-center">
 						<UpdateCartQuantity id={cart[i][0]} 
 							currentQuantity={cart[i][1]} cartItems={cart} />
