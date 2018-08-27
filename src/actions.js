@@ -75,3 +75,34 @@ export const requestCartServerList = (cartIds) => (dispatch) => {
 		}
 	}
 }
+
+export const submitContactFormContent = (fName, email, subject, message) => (dispatch) => {
+
+	const messageToSend = {
+		"firstName" : fName,
+		"email" : email,
+		"subject" : subject,
+		"message" : message
+	}
+
+	postToServer(messageToSend);
+
+	async function postToServer(messageJSON) {
+		try{
+
+			const response = await fetch('http://localhost:3000/contact-form-submit', {
+				method: 'POST',
+				body: messageJSON,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			const data = await response.json();
+			dispatch({ type: REQUEST_CART_LIST_SUCCESS, payload: data });
+
+		} catch (error) {
+			dispatch({ type: REQUEST_CART_LIST_FAILED, payload: error });
+		}
+	}
+}
