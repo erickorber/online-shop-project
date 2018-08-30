@@ -9,10 +9,7 @@ import {
 	REQUEST_CART_LIST_FAILED,
 	REQUEST_PRODUCT_PENDING,
 	REQUEST_PRODUCT_SUCCESS,
-	REQUEST_PRODUCT_FAILED,
-	MESSAGE_SENT_RESPONSE_PENDING,
-	MESSAGE_SENT_RESPONSE_SUCCESS,
-	MESSAGE_SENT_RESPONSE_FAILED  
+	REQUEST_PRODUCT_FAILED  
 } from './constants.js';
 
 const initialUserState = {
@@ -34,12 +31,6 @@ const initialProductState = {
 const initialCartServerListState = {
 	isPending: false,
 	serverList: [],
-	error: ''
-}
-
-const initialContactFormResponseState = {
-	isPending: false,
-	response: '',
 	error: ''
 }
 
@@ -91,23 +82,9 @@ export const cartServerListReducer = (state = initialCartServerListState, action
 	}
 }
 
-export const contactFormResponseReducer = (state = initialContactFormResponseState, action = {}) => {
-	switch(action.type) {
-		case MESSAGE_SENT_RESPONSE_PENDING:
-			return Object.assign({}, state, { isPending: true });
-		case MESSAGE_SENT_RESPONSE_SUCCESS:
-			return Object.assign({}, state, { isPending: false, response: action.payload });
-		case MESSAGE_SENT_RESPONSE_FAILED:
-			return Object.assign({}, state, { isPending: false, error: action.payload });	
-		default:
-			return state;
-	}
-}
-
 export const rootReducer = combineReducers({
 	user: userReducer,
 	productList: productListReducer,
 	product: productReducer,
-	cartServerList: cartServerListReducer,
-	contactFormResponse: contactFormResponseReducer
+	cartServerList: cartServerListReducer
 })
