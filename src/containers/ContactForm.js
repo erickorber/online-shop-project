@@ -19,7 +19,6 @@ class ContactForm extends Component {
 	    this.handleSubjectChange = this.handleSubjectChange.bind(this);
 	    this.handleMessageChange = this.handleMessageChange.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
-	 //   this.postToServer = this.postToServer.bind(this);
 	}
 
 	componentDidMount() {
