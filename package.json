@@ -10,6 +10,7 @@
     "ajv-keywords": "^3.2.0",
     "bootstrap": "^4.1.1",
     "connected-react-router": "^4.3.0",
+    "email-validator": "^2.0.4",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
     "popper.js": "^1.14.3",
