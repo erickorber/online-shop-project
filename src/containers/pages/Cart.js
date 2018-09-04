@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { requestCartServerList } from '../../actions.js';
 import UpdateCartQuantity from '../UpdateCartQuantity.js';
 import DeleteButton from '../DeleteButton.js';
+import '../../css/Cart.css';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -36,9 +37,9 @@ class Cart extends Component {
 			tableRows.push(
 				<tr key={list[i][0].id}>
 					<th scope="row">
-						<img className="w-100 mx-auto my-1" src={'http://localhost:3000/images/product/' + list[i][0].img_url} 
+						<img className="w-100 cart-img mx-auto my-1" src={'http://localhost:3000/images/product/' + list[i][0].img_url} 
 						alt={list[i][0].name}></img>
-						{list[i][0].name}
+						<p className="cart-name">{list[i][0].name}</p>
 					</th>
 					<td className="text-center">
 						<UpdateCartQuantity id={cart[i][0]} 
