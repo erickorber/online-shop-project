@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import validator from 'email-validator';
+import Recaptcha from 'react-recaptcha';
+import '../css/ContactForm.css';
 
 class ContactForm extends Component {
 	
@@ -11,13 +13,15 @@ class ContactForm extends Component {
 	    	firstName: '',
 	    	email: '',
 	    	subject: '',
-	    	message: ''
+	    	message: '',
+	    	recaptchaVerified: false 
 	    };
 
 	    this.handleNameChange = this.handleNameChange.bind(this);
 	    this.handleEmailChange = this.handleEmailChange.bind(this);
 	    this.handleSubjectChange = this.handleSubjectChange.bind(this);
 	    this.handleMessageChange = this.handleMessageChange.bind(this);
+	    this.onRecaptchaVerified = this.onRecaptchaVerified.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -48,6 +52,12 @@ class ContactForm extends Component {
 	handleMessageChange(event) {
 		this.setState({
 			message: event.target.value
+		});
+	}
+
+	onRecaptchaVerified() {
+		this.setState({
+			recaptchaVerified: true
 		});
 	}
 
@@ -154,7 +164,17 @@ class ContactForm extends Component {
 					</div>
 					<div className="form-row">
 						<div className="col-12">
-							<button type="submit" className="btn btn-lg btn-primary btn-block mb-2">Send Message</button>
+							<Recaptcha sitekey="6LctMm4UAAAAAEVrlrUy2HLjPIJEWugx7TzF7jef"
+								className="mb-3" render="explicit" verifyCallback={this.onRecaptchaVerified}/>
+						</div>
+					</div>
+					<div className="form-row">
+						<div className="col-12">
+							{this.state.recaptchaVerified === true ? (
+								<button type="submit" className="submit-btn btn btn-lg btn-primary btn-block mx-auto mb-4">Send Message</button>
+							) : (
+								<button className="submit-btn btn btn-lg btn-primary btn-block mx-auto mb-4" disabled>Send Message</button>
+							)}
 						</div>
 					</div>
 				</form>
