@@ -1,0 +1,11 @@
+@media (max-width: 1199.98px) {
+	.product-img {
+		width: 100% !important;
+	}
+}
+
+@media (min-width: 1200px) {
+	.product-img {
+		max-width: 400px;
+	}
+}

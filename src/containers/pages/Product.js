@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestProduct } from '../../actions.js';
 import AddToCartButton from '../AddToCartButton.js';
+import '../../css/Product.css';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -68,7 +69,7 @@ class Product extends Component {
 					<div className="row">
 						<div className="col-md-6">
 
-							<img className="product-img d-block mx-auto w-100 mb-3"
+							<img className="product-img d-block mx-auto mb-3"
 							src={'http://localhost:3000/images/product/' + product.img_url} alt={ product.name }></img>
 
 							<AddToCartButton id = {product.id} />

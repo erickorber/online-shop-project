@@ -63,7 +63,7 @@ class AddToCartButton extends Component {
 		}
 
 		return (
-			<div className="mb-3">
+			<div className="mb-3 d-block mx-auto add-to-cart-div">
 				
 				<button className="btn btn-primary add-to-cart-button" type="button"
 						onClick={() => buttonClick(id, currentQuantity, cartItems)}>Add To Cart</button>
