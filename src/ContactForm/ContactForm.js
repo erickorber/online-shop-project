@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import validator from 'email-validator';
 import Recaptcha from 'react-recaptcha';
-import '../css/ContactForm.css';
+import data from './data.js';
+import './ContactForm.css';
 
 class ContactForm extends Component {
 	
@@ -86,18 +87,18 @@ class ContactForm extends Component {
 
 	    if (testsPassed === totalTests) {
 	    	let currentComponent = this;
-	    	postToServer(messageForServer, currentComponent);
+	    	postToServer(messageForServer, currentComponent, data.serverAddress);
 	    } else {
 	        this.setState({
 		    	submitResponse: 'fail'
 		    });
 	    }
 
-	    async function postToServer(messageJSON, currentComponent) {
+	    async function postToServer(messageJSON, currentComponent, serverAddress) {
 
 			try{
 
-				const response = await fetch('http://localhost:3000/contact-form-submit', {
+				const response = await fetch(serverAddress, {
 					method: 'POST',
 					body: messageJSON,
 					headers: {
@@ -164,8 +165,8 @@ class ContactForm extends Component {
 					</div>
 					<div className="form-row">
 						<div className="col-12">
-							<Recaptcha sitekey="6LctMm4UAAAAAEVrlrUy2HLjPIJEWugx7TzF7jef"
-								className="mb-3" render="explicit" verifyCallback={this.onRecaptchaVerified}/>
+							<Recaptcha sitekey={data.recaptchaSiteKey} className="mb-3" render="explicit"
+								verifyCallback={this.onRecaptchaVerified}/>
 						</div>
 					</div>
 					<div className="form-row">
