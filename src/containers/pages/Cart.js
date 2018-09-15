@@ -62,7 +62,7 @@ class Cart extends Component {
 			totalPrice += (list[i][0].price * list[i][1]);
 		}
 
-		return totalPrice;
+		return totalPrice.toFixed(2);
 	}
 
 	render() {
