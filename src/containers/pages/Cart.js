@@ -27,7 +27,45 @@ class Cart extends Component {
 	componentDidMount() {
 		if (this.props.cart2DArrayProp.length > 0) {
 			this.props.onServerListRequest(this.props.cart2DArrayProp);
-		}	
+		}
+
+		this.handleCheckout = this.handleCheckout.bind(this);
+	}
+
+	handleCheckout() {
+
+		let items = [];
+		for (let i = 0; i < this.props.cart2DArrayProp.length; i++) {
+			items.push({
+				id: this.props.cart2DArrayProp[i][0],
+				quantity: this.props.cart2DArrayProp[i][1]
+			});
+		}
+
+	    postToServer(items, "http://localhost:3000/checkout");
+
+	    async function postToServer(items, serverAddress) {
+
+			try{
+
+				const response = await fetch(serverAddress, {
+					method: 'POST',
+					mode: 'cors',
+					body: JSON.stringify(items),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+
+				const redirectURL = await response.json();
+
+				//Redirect the user to PayPal for checkout
+				window.location = redirectURL;
+
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	}
 
 	displayItemsInCart(list, cart) {
@@ -152,7 +190,7 @@ class Cart extends Component {
 
 						<div className="row my-2">
 							<div className="col-8 offset-2">
-								<button className="btn btn-primary btn-block" type="button" value="add cart">PayPal Placeholder</button>
+								<button className="btn btn-primary btn-block" type="button" onClick={this.handleCheckout}>Pay with PayPal</button>
 							</div>
 						</div>
 					</div>);
