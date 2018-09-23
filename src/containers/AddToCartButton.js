@@ -27,7 +27,6 @@ class AddToCartButton extends Component {
 
 		const changeQuantity = (event) => {
 			currentQuantity = Number(event.target.value);
-
 		}
 
 		const buttonClick = (id, quantity, cartItems) => {
@@ -40,23 +39,29 @@ class AddToCartButton extends Component {
 
 					//If this item isn't the one that needs updating, then
 					//just return it as-is.
-					if (item[0] !== id) {
+					if (item.id !== id) {
 						n++;
 						return item;
 					}
 
 					//Otherwise, increase the quantity accordingly.
-					const newQuantity = quantity + item[1];
-					return [item[0], newQuantity];
+					const newQuantity = quantity + item.quantity;
+					return {
+						id: item.id,
+						quantity: newQuantity
+					};
 
 				}
 
 			);
 
 			
-
+			//If a new item needs to be added to the cart
 			if (n === newCart.length) {
-				newCart.push([id, quantity]);				
+				newCart.push({
+					id: id,
+					quantity: quantity
+				});				
 			}
 
 			dispatchUpdatedCart(newCart);

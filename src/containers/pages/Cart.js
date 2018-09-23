@@ -11,38 +11,66 @@ const mapStateToProps = (state) => {
 		serverList: state.cartServerList.serverList,
 		error: state.cartServerList.error,
 		isPending: state.cartServerList.isPending,
-	    cart2DArrayProp: state.user.cartItems
+	    cart: state.user.cartItems
 	}
 }
 
 //This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onServerListRequest: (cartIds) => dispatch(requestCartServerList(cartIds))
+		onServerListRequest: (cart) => dispatch(requestCartServerList(cart))
 	}
 }
 
 class Cart extends Component {
 
-	componentDidMount() {
-		if (this.props.cart2DArrayProp.length > 0) {
-			this.props.onServerListRequest(this.props.cart2DArrayProp);
-		}
+	constructor(props) {
+	    super(props);
+	    this.state = {
+	    	readyToProceed: false
+	    };
 
-		this.handleCheckout = this.handleCheckout.bind(this);
+   	    this.handleCheckout = this.handleCheckout.bind(this);
+	}
+
+	componentDidMount() {
+		this.checkIfReadyToProceed();
+	}
+
+	componentDidUpdate(prevProps) {
+		this.checkIfReadyToProceed();
+	}
+
+	checkIfReadyToProceed() {
+		
+		//This condition prevents an endless loop
+		if (!this.state.readyToProceed) {
+
+			//Variable to check if the serverList contains all the items in the cart.
+			//It is allowed to contain more items than necessary, just not less.
+			const requiredProductsPresent = 
+				this.areRequiredProductsPresent(this.props.cart, this.props.serverList);
+			
+			//Just make sure we aren't already making a request to the server
+			if (!this.props.isPending) {
+
+				//If the serverList contains all items currently in the cart,
+				//then we may proceed. If not, then we must send a request to
+				//our server.
+				if (requiredProductsPresent) {
+					this.setState({
+						readyToProceed: true
+					});
+				} else {
+					this.props.onServerListRequest(this.props.cart);
+				}
+			}
+		}
 	}
 
 	handleCheckout() {
 
-		let items = [];
-		for (let i = 0; i < this.props.cart2DArrayProp.length; i++) {
-			items.push({
-				id: this.props.cart2DArrayProp[i][0],
-				quantity: this.props.cart2DArrayProp[i][1]
-			});
-		}
-
-	    postToServer(items, "http://localhost:3000/checkout");
+	    postToServer(this.props.cart, "http://localhost:3000/checkout");
 
 	    async function postToServer(items, serverAddress) {
 
@@ -68,62 +96,121 @@ class Cart extends Component {
 		}
 	}
 
-	displayItemsInCart(list, cart) {
+	displayItemsInCart(cartForDisplaying, cart) {
+		
 		const tableRows = [];
 		
-		for (let i = 0; i < list.length; i++) {
+		cartForDisplaying.forEach((item) => {
+
 			tableRows.push(
-				<tr key={list[i][0].id}>
+				<tr key={item.id}>
 					<th scope="row">
-						<img className="w-100 cart-img mx-auto my-1" src={'http://localhost:3000/images/product/' + list[i][0].img_url} 
-						alt={list[i][0].name}></img>
-						<p className="cart-name">{list[i][0].name}</p>
+						<img className="w-100 cart-img mx-auto my-1" src={'http://localhost:3000/images/product/' + item.imgURL} 
+						alt={item.name}></img>
+						<p className="cart-name">{item.name}</p>
 					</th>
 					<td className="text-center">
-						<UpdateCartQuantity id={cart[i][0]} 
-							currentQuantity={cart[i][1]} cartItems={cart} />
-						<DeleteButton id={cart[i][0]} cartItems={cart} />
+						<UpdateCartQuantity id={item.id} 
+							currentQuantity={item.quantity} cartItems={cart} />
+						<DeleteButton id={item.id} cartItems={cart} />
 					</td>
-					<td className="text-center">${list[i][0].price}</td>
+					<td className="text-center">${item.price}</td>
 				</tr>
 			);
-		}
+
+		});
 
 		return tableRows;
 	}
 
-	displayTotalPrice(list) {
+	displayTotalPrice(cartForDisplaying) {
 
 		let totalPrice = 0;
 
-		for (let i = 0; i < list.length; i++) {
-			totalPrice += (list[i][0].price * list[i][1]);
-		}
+		cartForDisplaying.forEach((cartItem) => {
+			totalPrice += (cartItem.price * cartItem.quantity);
+		});
 
 		return totalPrice.toFixed(2);
 	}
 
+	areRequiredProductsPresent(cart, serverList) {
+
+		if (cart.length === 0) {
+			return true;
+		}
+
+		if (cart.length > serverList.length) {
+			return false;
+		}
+
+		cart.forEach((cartItem) => {
+
+			const checkId = (productFromServer) => {
+				return productFromServer.id === cartItem.id;
+			}
+
+			const correctProduct = serverList.find(checkId);
+
+			if (correctProduct === undefined) {
+				return false;
+			}
+
+		});
+
+		return true;
+	}
+
 	render() {
 
-		const { cart2DArrayProp, serverList, error, isPending } = this.props;
+		const { cart, serverList, error, isPending } = this.props;
 
-		const cart2DArrayForHTMLTable = [];
+		//This is the array that will be used to display the cart details on the page
+		const cartForDisplaying = [];
 
-		if (serverList !== undefined
-			&& serverList.length > 0) {
+		//Doing some necessary checking to avoid errors, along with unnecessary extra
+		//requests to the server
+		if (this.state.readyToProceed) {
 
-			for (let i = 0; i < cart2DArrayProp.length; i++) {
+			//Just checking to make sure the product info needed from the server has 
+			//already been successfully downloaded.
+			if (serverList !== undefined
+				&& serverList.length > 0) {
 
-				const checkId = (serverProduct) => {
-					return serverProduct.id === cart2DArrayProp[i][0];
-				}
+				//Now that the product info from the server is ready to use, cycle through
+				//each item in the cart array stored as a redux state
+				cart.forEach((cartItem) => {
 
-				cart2DArrayForHTMLTable.push([serverList.find(checkId), cart2DArrayProp[i][1]]);
-			}
+					//To find the correct match (see comments below), we compare the id
+					//of the object downloaded from the server to the id of our current
+					//cart array item, and return true if they are identical. If they are
+					//not identical, the next item in the array of downloaded objects
+					//will be checked until a positive match is found.
+					const checkId = (productFromServer) => {
+						return productFromServer.id === cartItem.id;
+					}
+
+					//We want to single out, from the array of objects that
+					//were downloaded from our back-end server, the one object
+					//that matches up with our current item in the cart array
+					const correctProduct = serverList.find(checkId);
+
+					cartForDisplaying.push({
+						id: correctProduct.id,
+						name: correctProduct.name,
+						imgURL: correctProduct.img_url,
+						price: correctProduct.price,
+						quantity: cartItem.quantity
+					});
+
+				});
+			}	
 		}
 
 		let pageContent;
 
+		//Handle errors if they exist, by indicating
+		//to the user that something has gone wrong.
 		if (error !== '') {
 			
 			pageContent =
@@ -134,71 +221,80 @@ class Cart extends Component {
 					</div>
 				</div>);
 
-		} else if (isPending) {
+		} else {
 
-			pageContent = (<div></div>);
+			//If no errors exist, but the required content is still pending from the server,
+			//or it isn't ready yet locally for some reason, then show nothing
+			if (isPending || !this.state.readyToProceed) {
 
-		} else if (cart2DArrayProp.length === 0) {
-			
-			pageContent =
-				(<div>
-					<div className="row page-title-spacing">
-						<div className="col-12">
-							<h2 className="text-center slight-shadow">Your Cart</h2>
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="col-12">
-							<p className="text-center">There doesn't seem to be anyhing 
-								in your cart right now. Check out the shop if you'd like 
-								to order something special!</p>
-						</div>
-					</div>
-				</div>);
-
-		} else if (cart2DArrayForHTMLTable.length > 0) {
-			
-			if (cart2DArrayForHTMLTable.length <= serverList.length) {
-
-				pageContent =
-					(<div>
-						<div className="row page-title-spacing">
-							<div className="col-12">
-								<h2 className="text-center slight-shadow">Your Cart</h2>
-							</div>
-						</div>
-
-						<div className="row">
-							<table className="table table-bordered table-striped">
-							  	<thead>
-							    	<tr>
-									    <th scope="col">Product</th>
-									    <th scope="col" className="text-center">Quantity</th>
-									    <th scope="col" className="text-center">Price</th>
-							    	</tr>
-							  	</thead>
-							  	<tbody>
-							  		{this.displayItemsInCart(cart2DArrayForHTMLTable, cart2DArrayProp)}
-							  		<tr>
-							  			<th scope="row" colSpan="2">Total</th>
-							  			<td className="text-center">${this.displayTotalPrice(cart2DArrayForHTMLTable)}</td>
-							  		</tr>
-							  	</tbody>
-							</table>
-						</div>
-
-						<div className="row my-2">
-							<div className="col-8 offset-2">
-								<button className="btn btn-primary btn-block" type="button" onClick={this.handleCheckout}>Pay with PayPal</button>
-							</div>
-						</div>
-					</div>);
+				pageContent = (<div></div>);
 
 			} else {
-				pageContent = (<div></div>);
-			}	
-		}
+
+				//If no errors, and the content is ready, but the cart is empty, then
+				//indicate that to the user
+				if (cart.length === 0) {
+			
+					pageContent =
+						(<div>
+							<div className="row page-title-spacing">
+								<div className="col-12">
+									<h2 className="text-center slight-shadow">Your Cart</h2>
+								</div>
+							</div>
+
+							<div className="row">
+								<div className="col-12">
+									<p className="text-center">There doesn't seem to be anyhing 
+										in your cart right now. Check out the shop if you'd like 
+										to order something special!</p>
+								</div>
+							</div>
+						</div>);
+
+				//Otherwise, with no errors, the content ready, and the cart containing
+				//at LEAST one item, then display the cart contents.
+				} else {
+
+					pageContent =
+						(<div>
+							<div className="row page-title-spacing">
+								<div className="col-12">
+									<h2 className="text-center slight-shadow">Your Cart</h2>
+								</div>
+							</div>
+
+							<div className="row">
+								<table className="table table-bordered table-striped">
+								  	<thead>
+								    	<tr>
+										    <th scope="col">Product</th>
+										    <th scope="col" className="text-center">Quantity</th>
+										    <th scope="col" className="text-center">Price</th>
+								    	</tr>
+								  	</thead>
+								  	<tbody>
+								  		{this.displayItemsInCart(cartForDisplaying, cart)}
+								  		<tr>
+								  			<th scope="row" colSpan="2">Total</th>
+								  			<td className="text-center">${this.displayTotalPrice(cartForDisplaying)}</td>
+								  		</tr>
+								  	</tbody>
+								</table>
+							</div>
+
+							<div className="row my-2">
+								<div className="col-8 offset-2">
+									<button className="btn btn-primary btn-block" type="button" onClick={this.handleCheckout}>Pay with PayPal</button>
+								</div>
+							</div>
+						</div>);
+
+				}
+
+			}
+
+		}	
 
 		return (
 			<div className="container">

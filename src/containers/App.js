@@ -18,14 +18,14 @@ import { updateCart } from '../actions.js';
 const mapStateToProps = (state) => {
 	return {
 		pathname: state.router.location.pathname,
-    cartReduxState: state.user.cartItems
+    cart: state.user.cartItems
 	}
 }
 
 //This is for when you'd like to update the state
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCartFromCookie: () => dispatch(getCookie('cart2DArrayCookie')),
+    loadCartFromCookie: () => dispatch(getCookie('cartCookie')),
     dispatchUpdatedCart: (newCart) => dispatch(updateCart(newCart))
   }
 }
@@ -36,8 +36,8 @@ class App extends Component {
 
     let totalQuantity = 0;
 
-    cartArray.forEach((item, i) => {
-      totalQuantity += item[1];
+    cartArray.forEach((item) => {
+      totalQuantity += item.quantity;
     });
 
     return totalQuantity;
@@ -55,25 +55,37 @@ class App extends Component {
 
   render() {
 
-  	const { pathname, cartReduxState, loadCartFromCookie, dispatchUpdatedCart } = this.props;
+  	const { pathname, cart, loadCartFromCookie, dispatchUpdatedCart } = this.props;
 
     let cartIdQuantityPair;  
 
-    //Only check to see if cookies are required if the redux state is empty
-    if (cartReduxState.length === 0) {
-      //If cookies are enabled
+    //If the cart has items in it, then either the data from the cookie has already
+    //been loaded, or there were no cookies saved to begin with. In any case, there is
+    //no need to deal with cookies at this point. But if the cart is empty, check to see
+    //if a cookie needs to be (or even can be) loaded to populate the cart with
+    //previously added products.
+    if (cart.length === 0) {
+      
+      //If cookies are enabled and a saved cookie exists (meaning that upon calling it,
+      //data was actually returned, instead of undefined), the load the data from that
+      //cookie. Assuming the cookie data does not indicate an empty cart (which might
+      //occur if the user adds items and then later manually deletes them all), then
+      //update the cart state using Redux to match the saved cookie data. 
       if (navigator.cookieEnabled && loadCartFromCookie() !== undefined) {
 
         cartIdQuantityPair = this.makeDeepCopy(JSON.parse(loadCartFromCookie()));
 
+        //If the saved cookie data does not indicate an empty cart,
+        //then update the cart state.
         if (cartIdQuantityPair.length > 0) {
           dispatchUpdatedCart(cartIdQuantityPair);          
         }
+
       } else {
-        cartIdQuantityPair = this.makeDeepCopy(cartReduxState);
+        cartIdQuantityPair = this.makeDeepCopy(cart);
       }
     } else {
-      cartIdQuantityPair = this.makeDeepCopy(cartReduxState);
+      cartIdQuantityPair = this.makeDeepCopy(cart);
     }
 
     const totalQuantity = this.getTotalCartQuantity(cartIdQuantityPair);

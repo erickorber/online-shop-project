@@ -19,12 +19,17 @@ class DeleteButton extends Component {
 		
 		const newCart = [];
 
+		//"Deleting" in this case is really just creating a new
+		//array that doesn't include the item that is to be deleted
 		cartItems.forEach(
 
 			(item, i) => {
 
-				if (item[0] !== id) {
-					newCart.push([item[0], item[1]]);
+				if (item.id !== id) {
+					newCart.push({
+						id: item.id,
+						quantity: item.quantity
+					});
 				}
 
 			}

@@ -14,7 +14,7 @@ import { setCookie } from 'redux-cookie';
 
 export const updateCart = (cartItems) => (dispatch) => {
 	if (navigator.cookieEnabled) {
-		dispatch(setCookie('cart2DArrayCookie', cartItems, { expires: 365 }));
+		dispatch(setCookie('cartCookie', cartItems, { expires: 365 }));
 	} 
 	
 	//We will always be prioritizing this state here, not the cookie 
@@ -53,15 +53,15 @@ export const requestProduct = (urlName) => (dispatch) => {
 	}
 }
 
-export const requestCartServerList = (cartIds) => (dispatch) => {
+export const requestCartServerList = (cart) => (dispatch) => {
 	
 	dispatch({ type: REQUEST_CART_LIST_PENDING });
 	
 	let idsForURL = "";
 
-	for (let i = 0; i < cartIds.length; i++) {
-        idsForURL = idsForURL.concat(cartIds[i][0]);
-    }
+	cart.forEach((item) => {
+		idsForURL = idsForURL.concat(item.id);
+	});
 
     fetchFromServer(idsForURL);
 

@@ -20,17 +20,20 @@ class UpdateCartQuantity extends Component {
 			
 			const newCart = cartItems.map(
 
-				(item, i) => {
+				(item) => {
 
 					//If this item isn't the one that needs updating, then
 					//just return it as-is
-					if (item[0] !== id) {
+					if (item.id !== id) {
 						return item;
 					}
 
 					//Once the item that needs updating is found, return it
 					//with the updated quantity value
-					return [item[0], Number(event.target.value)];
+					return {
+						id: item.id,
+						quantity: Number(event.target.value)
+					};
 
 				}
 
