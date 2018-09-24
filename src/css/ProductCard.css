@@ -1,3 +1,7 @@
+.card {
+	border-style: none;
+}
+
 .card-body {
 	padding: 0;
 }
@@ -13,6 +17,11 @@
     transform: scale(1.05);
 }
 
+.card-img-top {
+	object-fit: contain;
+	width: 100%;
+}
+
 @media only screen and (max-width: 349.98px) {
 	.card-width {
 		width: 250px;
@@ -20,7 +29,6 @@
 	}
 
 	.card-img-top {
-		width: 220px;
 		height: 220px;
 	}
 }
@@ -44,7 +52,6 @@
 	}
 
 	.card-img-top {
-		width: 300px;
 		height: 300px;
 	}
 }
@@ -60,7 +67,6 @@
 	}
 
 	.card-img-top {
-		width: 220px;
 		height: 220px;
 	}
 
@@ -81,7 +87,6 @@
 	}
 
 	.card-img-top {
-		width: 190px;
 		height: 190px;
 	}
 
