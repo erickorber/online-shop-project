@@ -9,7 +9,7 @@ import Shop from './pages/Shop.js';
 import Product from './pages/Product.js';
 import Cart from '../containers/pages/Cart.js';
 import AdminLogin from '../components/pages/AdminLogin.js';
-import Return from '../components/pages/Return.js';
+import Return from '../containers/pages/Return.js';
 import { Route, Switch } from 'react-router';
 import { getCookie } from 'redux-cookie';
 import { updateCart } from '../actions.js';
