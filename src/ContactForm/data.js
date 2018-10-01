@@ -1,5 +1,7 @@
+import { SERVER_ADDRESS } from '../constants.js';
+
 const data = {
-	"serverAddress" : "http://localhost:3000/contact-form-submit",
+	"serverAddress" : SERVER_ADDRESS + "/contact-form-submit",
 	"recaptchaSiteKey" : "6LctMm4UAAAAAEVrlrUy2HLjPIJEWugx7TzF7jef"
 }
 
