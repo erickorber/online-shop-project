@@ -4,6 +4,7 @@ import { requestCartServerList } from '../../actions.js';
 import UpdateCartQuantity from '../UpdateCartQuantity.js';
 import DeleteButton from '../DeleteButton.js';
 import '../../css/Cart.css';
+import { SERVER_ADDRESS } from '../../constants.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -70,7 +71,7 @@ class Cart extends Component {
 
 	handleCheckout() {
 
-	    postToServer(this.props.cart, "http://localhost:3000/checkout");
+	    postToServer(this.props.cart, SERVER_ADDRESS + "/checkout");
 
 	    async function postToServer(items, serverAddress) {
 
@@ -105,7 +106,7 @@ class Cart extends Component {
 			tableRows.push(
 				<tr key={item.id}>
 					<th scope="row">
-						<img className="w-100 cart-img mx-auto my-1" src={'http://localhost:3000/images/product/' + item.imgURL} 
+						<img className="w-100 cart-img mx-auto my-1" src={SERVER_ADDRESS + '/images/product/' + item.imgURL} 
 						alt={item.name}></img>
 						<p className="cart-name">{item.name}</p>
 					</th>

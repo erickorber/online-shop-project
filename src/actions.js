@@ -8,7 +8,8 @@ import {
 	REQUEST_CART_LIST_FAILED,
 	REQUEST_PRODUCT_PENDING,
 	REQUEST_PRODUCT_SUCCESS,
-	REQUEST_PRODUCT_FAILED  
+	REQUEST_PRODUCT_FAILED,
+	SERVER_ADDRESS  
 } from './constants.js';
 import { setCookie } from 'redux-cookie';
 
@@ -28,7 +29,7 @@ export const requestProductList = () => (dispatch) => {
 	
 	async function fetchFromServer() {
 		try{
-			const response = await fetch('http://localhost:3000/');
+			const response = await fetch(SERVER_ADDRESS);
 			const data = await response.json();
 			dispatch({ type: REQUEST_PRODUCT_LIST_SUCCESS, payload: data });
 		} catch (error) {
@@ -44,7 +45,7 @@ export const requestProduct = (urlName) => (dispatch) => {
 	
 	async function fetchFromServer() {
 		try{
-			const response = await fetch('http://localhost:3000/product/' + urlName);
+			const response = await fetch(SERVER_ADDRESS + '/product/' + urlName);
 			const data = await response.json();
 			dispatch({ type: REQUEST_PRODUCT_SUCCESS, payload: data });
 		} catch (error) {
@@ -67,7 +68,7 @@ export const requestCartServerList = (cart) => (dispatch) => {
 
 	async function fetchFromServer(idList) {
 		try{
-			const response = await fetch('http://localhost:3000/cart/' + idList);
+			const response = await fetch(SERVER_ADDRESS + '/cart/' + idList);
 			const data = await response.json();
 			dispatch({ type: REQUEST_CART_LIST_SUCCESS, payload: data });
 		} catch (error) {
