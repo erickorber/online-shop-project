@@ -5,6 +5,11 @@
 	font-size: 18px;
 }
 
+.logo-link {
+	background-color: transparent;
+	margin: 2px;
+}
+
 .navbar {
 	border-bottom: 1px solid #dee2e6;
 }
