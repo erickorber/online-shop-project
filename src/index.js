@@ -19,7 +19,7 @@ const history = createBrowserHistory();
 const store = createStore(
 	connectRouter(history)(rootReducer),
 	compose(applyMiddleware(routerMiddleware(history), 
-		thunkMiddleware, createCookieMiddleware(Cookies), logger))
+		thunkMiddleware, createCookieMiddleware(Cookies)))
 );
 
 ReactDOM.render(<Provider store = {store}>
