@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/ProductCard.css';
 import { Link } from 'react-router-dom';
+import { SERVER_ADDRESS } from '../constants.js';
 
 const ProductCard = ({urlName, productName, price, img}) => {
 
@@ -8,7 +9,7 @@ const ProductCard = ({urlName, productName, price, img}) => {
 		<div className="col-12 col-sm-6 col-md-4 col-lg-3">			
 			<Link to={'/product/' + urlName} className="card mx-auto card-width product-link d-flex flex-wrap">
 				<div className="">
-						<img className="card-img-top rounded mx-auto my-2" src={'http://localhost:3000/images/product/' + img} alt="Product"></img>
+						<img className="card-img-top rounded mx-auto my-2" src={SERVER_ADDRESS + '/images/product/' + img} alt="Product"></img>
 				</div>
 				
 				<div className="card-body mx-auto">
