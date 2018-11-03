@@ -4,6 +4,7 @@ import { requestProduct } from '../../actions.js';
 import AddToCartButton from '../AddToCartButton.js';
 import '../../css/Product.css';
 import { SERVER_ADDRESS } from '../../constants.js';
+import nl2br from 'react-newline-to-break';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -77,7 +78,7 @@ class Product extends Component {
 
 						</div>
 						<div className="col-md-6">	
-							<p className="mt-2">{ product.description }</p>
+							<p className="mt-2">{ nl2br(product.description) }</p>
 						</div>
 					</div>
 				</div>

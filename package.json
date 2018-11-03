@@ -16,6 +16,7 @@
     "popper.js": "^1.14.4",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-newline-to-break": "^1.0.6",
     "react-recaptcha": "^2.3.10",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
