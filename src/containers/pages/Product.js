@@ -74,11 +74,19 @@ class Product extends Component {
 							<img className="product-img d-block mx-auto mb-3"
 							src={SERVER_ADDRESS + '/images/product/' + product.img_url} alt={ product.name }></img>
 
-							<AddToCartButton id = {product.id} />
+							{/* Shown only on mobile-sized portrait screens */}
+							<div className="d-sm-none">
+								<AddToCartButton id = {product.id} />
+							</div>
 
 						</div>
 						<div className="col-md-6">	
 							<p className="mt-2">{ nl2br(product.description) }</p>
+
+							{/* Shown only on screens larger than a mobile-sized portrait view */}
+							<div className="d-none d-sm-block">
+								<AddToCartButton id = {product.id} />
+							</div>
 						</div>
 					</div>
 				</div>
