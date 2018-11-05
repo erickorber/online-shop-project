@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestProduct } from '../../actions.js';
 import AddToCartButton from '../AddToCartButton.js';
 import '../../css/Product.css';
-import { SERVER_ADDRESS } from '../../constants.js';
+import { SERVER_ADDRESS, DEFAULT_CURRENCY } from '../../constants.js';
 import nl2br from 'react-newline-to-break';
 
 //This is what the state currently is
@@ -64,7 +64,7 @@ class Product extends Component {
 							<h3 className="slight-shadow text-center">{ product.name }</h3>
 						</div>
 						<div className="col-12">
-							<h4 className="slight-shadow text-center">${ product.price } CAD</h4>
+							<h4 className="slight-shadow text-center">${ product.price + ' ' + DEFAULT_CURRENCY }</h4>
 						</div>
 					</div>
 

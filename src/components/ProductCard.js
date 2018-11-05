@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/ProductCard.css';
 import { Link } from 'react-router-dom';
-import { SERVER_ADDRESS } from '../constants.js';
+import { SERVER_ADDRESS, DEFAULT_CURRENCY } from '../constants.js';
 
 const ProductCard = ({urlName, productName, price, img}) => {
 
@@ -14,7 +14,7 @@ const ProductCard = ({urlName, productName, price, img}) => {
 				
 				<div className="card-body mx-auto">
 					<p className="text-center product-card-text mb-1 font-weight-bold">{productName}</p>
-					<p className="text-center product-card-text">${price} CAD</p>
+					<p className="text-center product-card-text">${price + ' ' + DEFAULT_CURRENCY}</p>
 				</div>
 			</Link>	
 		</div>
