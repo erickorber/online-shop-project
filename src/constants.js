@@ -9,4 +9,5 @@ export const REQUEST_CART_LIST_PENDING = 'REQUEST_CART_LIST_PENDING';
 export const REQUEST_CART_LIST_SUCCESS = 'REQUEST_CART_LIST_SUCCESS';
 export const REQUEST_CART_LIST_FAILED = 'REQUEST_CART_LIST_FAILED';
 export const SERVER_ADDRESS = "https://xephyriumshop.com/api";
+export const FRONT_END_ADDRESS = "https://xephyriumshop.com";
 export const DEFAULT_CURRENCY = "USD";

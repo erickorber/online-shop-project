@@ -4,7 +4,7 @@ import { requestCartServerList } from '../../actions.js';
 import UpdateCartQuantity from '../UpdateCartQuantity.js';
 import DeleteButton from '../DeleteButton.js';
 import '../../css/Cart.css';
-import { SERVER_ADDRESS } from '../../constants.js';
+import { SERVER_ADDRESS, FRONT_END_ADDRESS } from '../../constants.js';
 
 //This is what the state currently is
 const mapStateToProps = (state) => {
@@ -106,7 +106,7 @@ class Cart extends Component {
 			tableRows.push(
 				<tr key={item.id}>
 					<th scope="row">
-						<img className="w-100 cart-img mx-auto my-1" src={SERVER_ADDRESS + '/images/product/' + item.imgURL} 
+						<img className="w-100 cart-img mx-auto my-1" src={FRONT_END_ADDRESS + '/images/product/' + item.imgURL} 
 						alt={item.name}></img>
 						<p className="cart-name">{item.name}</p>
 					</th>
