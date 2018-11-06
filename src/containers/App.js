@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../css/App.css';
 import Header from '../components/Header.js';
-import About from '../components/pages/About.js';
 import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
 import Shop from './pages/Shop.js';
+import FAQ from '../components/pages/FAQ.js';
 import Product from './pages/Product.js';
 import Cart from '../containers/pages/Cart.js';
-import AdminLogin from '../components/pages/AdminLogin.js';
 import Return from '../containers/pages/Return.js';
 import { Route, Switch } from 'react-router';
 import { getCookie } from 'redux-cookie';
@@ -95,11 +94,10 @@ class App extends Component {
         <Header page = {pathname} totalQuantity={totalQuantity} />
         <Switch>
           <Route exact path="/" component={Shop}/>
-          <Route exact path="/about" component={About}/>
+          <Route exact path="/faq" component={FAQ}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/cart" component={Cart}/>
           <Route exact path="/product/:urlName" component={Product}/>
-          <Route exact path="/admin" component={AdminLogin}/>
           <Route exact path="/success" component={Return}/>
           <Route path="*" component={Error404}/>
         </Switch>

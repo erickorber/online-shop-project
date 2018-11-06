@@ -29,9 +29,9 @@ const Header = ({ page, totalQuantity }) => {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             {isCurrentPageActive("Shop", page, "/")}
-          </li>
+          </li>          
           <li className="nav-item">
-            {isCurrentPageActive("About", page, "/about")}
+            {isCurrentPageActive("FAQ", page, "/faq")}
           </li>
           <li className="nav-item">
             {isCurrentPageActive("Contact", page, "/contact")}
