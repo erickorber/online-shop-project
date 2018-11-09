@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestProduct } from '../../actions.js';
 import AddToCartButton from '../AddToCartButton.js';
 import '../../css/Product.css';
-import { SERVER_ADDRESS, FRONT_END_ADDRESS, DEFAULT_CURRENCY } from '../../constants.js';
+import { FRONT_END_ADDRESS, DEFAULT_CURRENCY } from '../../constants.js';
 import nl2br from 'react-newline-to-break';
 
 //This is what the state currently is

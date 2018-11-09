@@ -4,6 +4,7 @@ import '../css/App.css';
 import Header from '../components/Header.js';
 import Error404 from '../components/pages/Error404.js';
 import Contact from '../components/pages/Contact.js';
+import Blank from '../components/pages/Blank.js';
 import Shop from './pages/Shop.js';
 import FAQ from '../components/pages/FAQ.js';
 import Product from './pages/Product.js';
@@ -99,6 +100,7 @@ class App extends Component {
           <Route exact path="/cart" component={Cart}/>
           <Route exact path="/product/:urlName" component={Product}/>
           <Route exact path="/success" component={Return}/>
+          <Route path="/paypal-return" component={Blank}/>
           <Route path="*" component={Error404}/>
         </Switch>
       </div>
